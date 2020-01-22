@@ -4,9 +4,9 @@
     "license": "license",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "Eduard Malyj",
+            "email": "eduard.malyj@kuhdo.de",
+            "homepage": "http://kuhdo.de"
         }
     ],
     "homepage": "https://github.com/kuhdo/survey",
@@ -19,6 +19,9 @@
         "mockery/mockery": "^1.1",
         "orchestra/testbench": "~3|~4",
         "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "autoload": {
         "psr-4": {
