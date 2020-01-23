@@ -6,6 +6,6 @@ project:
 stages:
   - jobs:
       - scripts:
-          - echo 'Going to slay the red dragon, watch me'
+          - echo 'test'
           - sleep 1
           - echo 'Nailed it'
