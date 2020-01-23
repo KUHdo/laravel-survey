@@ -1,0 +1,11 @@
+project:
+  key: LVLSUR
+  plan:
+    key: TAP
+    name: Test and publish
+stages:
+  - jobs:
+      - scripts:
+          - echo 'Going to slay the red dragon, watch me'
+          - sleep 1
+          - echo 'Nailed it'
