@@ -1,15 +1,26 @@
+---
+version: 2
 project:
   key: LVLSUR
   plan:
     key: TAP
     name: Test
 stages:
-  - jobs:
-      - scripts:
-          - composer install
-          - ./vendor/bin/phpunit --log-junit test-reports/phpunit.xml
-        requirements:
-          - Composer
-        testParsers:
-          - type: junit
-            testResults: "**/test-results/*.xml"
+  - Run tests:
+      - jobs:
+          - Install dependencies
+          - Run PHPUnit
+Install dependencies:
+  tasks:
+    - script: composer install
+  requirements:
+    - Composer
+Run PHPUnit:
+  tasks:
+    - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
+  final-tasks:
+    - test-parser:
+        type: junit
+        test-results: "**/test-results/*.xml"
+  requirements:
+    - Composer
