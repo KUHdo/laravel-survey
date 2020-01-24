@@ -31,4 +31,4 @@ Publish to repository:
         - rm -rf bamboo-specs
         - rm composer.lock
         - zip laravel-survey *
-        - curl -v --user 'EMalyj:W4vxTkVmUMG7' --upload-file laravel-survey.zip https://registry.kuhdo.de/repository/packages/packages/upload/KUHdo/laravel-survey/0.1
+        - curl -v --user 'EMalyj:W4vxTkVmUMG7' --upload-file laravel-survey.zip https://registry.kuhdo.de/repository/packages/packages/upload/kuhdo/laravel-survey/0.1
