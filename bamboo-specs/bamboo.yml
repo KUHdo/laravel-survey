@@ -2,7 +2,7 @@ project:
   key: LVLSUR
   plan:
     key: TAP
-    name: Test and publish
+    name: Test
 stages:
   - jobs:
       - scripts:
