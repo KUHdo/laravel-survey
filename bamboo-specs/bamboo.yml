@@ -9,6 +9,6 @@ stages:
           - composer install
           - composer test
         requirements:
-          - composer
+          - Composer
         testParsers:
           - junit
