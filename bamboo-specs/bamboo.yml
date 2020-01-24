@@ -6,8 +6,9 @@ project:
 stages:
   - jobs:
       - scripts:
-          - echo 'test'
           - composer install
           - composer test
         requirements:
           - composer
+        testParsers:
+          - phpunit
