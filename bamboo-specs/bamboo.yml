@@ -9,3 +9,5 @@ stages:
           - echo 'test'
           - composer install
           - composer test
+        requirements:
+          - composer
