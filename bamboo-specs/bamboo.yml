@@ -7,7 +7,7 @@ stages:
   - jobs:
       - scripts:
           - composer install
-          - phpunit --log-junit test-reports/phpunit.xml
+          - /usr/bin/phpunit --log-junit test-reports/phpunit.xml
         requirements:
           - Composer
           - PHPunit composer
