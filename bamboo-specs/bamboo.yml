@@ -11,4 +11,4 @@ stages:
         requirements:
           - composer
         testParsers:
-          - phpunit
+          - junit
