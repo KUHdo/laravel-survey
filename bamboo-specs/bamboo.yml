@@ -11,4 +11,5 @@ stages:
         requirements:
           - Composer
         testParsers:
-          - junit
+          - type: junit
+            testResults: "**/test-results/*.xml"
