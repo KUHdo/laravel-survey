@@ -7,5 +7,5 @@ stages:
   - jobs:
       - scripts:
           - echo 'test'
-          - sleep 1
-          - ls
+          - composer install
+          - composer test
