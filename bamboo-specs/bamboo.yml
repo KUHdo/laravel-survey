@@ -8,4 +8,4 @@ stages:
       - scripts:
           - echo 'test'
           - sleep 1
-          - echo 'Nailed it'
+          - ls
