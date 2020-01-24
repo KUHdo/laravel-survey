@@ -9,16 +9,22 @@ stages:
   - Run tests:
       jobs:
         - Run PHPUnit
+  - Publish code:
+      jobs:
+        - Publish to repository
 
 Run PHPUnit:
   tasks:
     - clean
     - script: composer install
     - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
-    - script: ls
   final-tasks:
     - test-parser:
         type: junit
         test-results: "**/test-reports/*.xml"
   requirements:
     - Composer
+
+Publish to repository:
+  tasks:
+    - script: ls
