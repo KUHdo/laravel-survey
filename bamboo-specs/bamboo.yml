@@ -9,3 +9,7 @@ stages:
           - echo 'test'
           - composer install
           - composer test
+        requirements:
+          - composer
+        artifacts:
+          - name: Laravel survey data
