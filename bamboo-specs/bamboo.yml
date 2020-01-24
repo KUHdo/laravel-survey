@@ -12,6 +12,7 @@ stages:
 
 Run PHPUnit:
   tasks:
+    - clean
     - script: composer install
     - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
     - script: ls
