@@ -13,10 +13,11 @@ stages:
 Run PHPUnit:
   tasks:
     - script: composer install
-    - script: ./vendor/bin/phpunit --log-junit ./test-results/phpunit.xml
+    - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
+    - script: ls
   final-tasks:
     - test-parser:
         type: junit
-        test-results: "**/test-results/*.xml"
+        test-results: "**/test-reports/*.xml"
   requirements:
     - Composer
