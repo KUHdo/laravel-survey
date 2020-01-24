@@ -11,8 +11,6 @@ stages:
         - Run PHPUnit
   - Publish code:
       jobs:
-        - Clean directory
-        - Zip files
         - Publish to repository
 
 Run PHPUnit:
@@ -27,16 +25,10 @@ Run PHPUnit:
   requirements:
     - Composer
 
-Clean directory:
+Publish to repository:
   tasks:
     - script:
         - rm -rf bamboo-specs
         - rm composer.lock
-
-Zip files:
-  tasks:
-    - script: zip laravel-survey *
-
-Publish to repository:
-  tasks:
-    - script: ls
+        - zip laravel-survey *
+        - ls
