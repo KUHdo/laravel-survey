@@ -8,17 +8,11 @@ plan:
 stages:
   - Run tests:
       jobs:
-        - Install dependencies
         - Run PHPUnit
-
-Install dependencies:
-  tasks:
-    - script: composer install
-  requirements:
-    - Composer
 
 Run PHPUnit:
   tasks:
+    - script: composer install
     - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
   final-tasks:
     - test-parser:
