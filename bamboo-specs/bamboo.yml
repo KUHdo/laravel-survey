@@ -10,7 +10,7 @@ variables:
 plan:
   project-key: LVLSUR
   key: TAP
-  name: Test
+  name: Test and publish
 
 stages:
   - Run tests:
