@@ -7,9 +7,9 @@ plan:
 
 stages:
   - Run tests:
-      - jobs:
-          - Install dependencies
-          - Run PHPUnit
+      jobs:
+        - Install dependencies
+        - Run PHPUnit
 
 Install dependencies:
   tasks:
