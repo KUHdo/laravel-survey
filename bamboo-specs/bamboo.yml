@@ -1,20 +1,22 @@
 ---
 version: 2
-project:
-  key: LVLSUR
-  plan:
-    key: TAP
-    name: Test
+plan:
+  project-key: LVLSUR
+  key: TAP
+  name: Test
+
 stages:
   - Run tests:
       - jobs:
           - Install dependencies
           - Run PHPUnit
+
 Install dependencies:
   tasks:
     - script: composer install
   requirements:
     - Composer
+
 Run PHPUnit:
   tasks:
     - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
