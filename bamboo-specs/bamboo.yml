@@ -13,7 +13,7 @@ stages:
 Run PHPUnit:
   tasks:
     - script: composer install
-    - script: ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
+    - script: ./vendor/bin/phpunit --log-junit ./test-results/phpunit.xml
   final-tasks:
     - test-parser:
         type: junit
