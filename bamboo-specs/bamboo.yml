@@ -13,11 +13,9 @@ plan:
   name: Test and publish
 
 stages:
-  - Run tests:
+  - Run tests and publish:
       jobs:
         - Run PHPUnit
-  - Publish code:
-      jobs:
         - Publish to repository
 
 Run PHPUnit:
