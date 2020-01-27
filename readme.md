@@ -9,7 +9,7 @@ For all KUHdo members please see [contributing.md](contributing.md)
 Via Composer
 
 ```bash
-$ composer require kuhdo/survey
+$ composer require kuhdo/laravel-survey
 ```
 
 ## Usage
