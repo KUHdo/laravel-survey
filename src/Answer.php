@@ -12,4 +12,12 @@ class Answer extends Model
      * @var string
      */
     protected $table = 'answers';
+
+    protected $fillable = [
+        'type',
+        'value',
+        'question_id',
+        'model_type',
+        'model_id'
+    ];
 }

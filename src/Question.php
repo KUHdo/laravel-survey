@@ -12,4 +12,10 @@ class Question extends Model
      * @var string
      */
     protected $table = 'questions';
+
+    protected $fillable = [
+        'category',
+        'question',
+        'survey_id',
+    ];
 }
