@@ -18,13 +18,10 @@ class WithQuestionTest extends TestCase
      */
     public function testMakeQuestion()
     {
-        $question = $this->makeQuestion([
-            'survey_id' => 4711
-        ]);
+        $question = $this->makeQuestion();
 
         $this->assertEquals('Test', $question->question);
         $this->assertEquals('Test', $question->category);
-        $this->assertEquals(4711, $question->survey_id);
     }
 
     /**

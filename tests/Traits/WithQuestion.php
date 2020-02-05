@@ -19,28 +19,12 @@ trait WithQuestion
      */
     function makeQuestion($attributes = [])
     {
-        $surveyId = $attributes['survey_id'] ?? $survey = $this->createSurvey()->id;
-
         $default = [
             'question' => 'Test',
-            'category' => 'Test',
-            'survey_id' => $surveyId
+            'category' => 'Test'
         ];
 
         $question = new Question(array_merge($default, $attributes));
-
-        return $question;
-    }
-
-    /**
-     * @param array $attributes
-     * @return Question
-     */
-    function createQuestion($attributes = [])
-    {
-        $question = $this->makeQuestion($attributes);
-
-        $question->save();
 
         return $question;
     }
@@ -62,6 +46,36 @@ trait WithQuestion
     }
 
     /**
+     * @param array $attributes
+     * @return Question
+     */
+    function createQuestion($attributes = [])
+    {
+        $question = $this->makeQuestion($attributes);
+
+        $survey = $this->firstOrCreateSurvey($attributes['survey_id'] ?? null);
+        $question->survey()->associate($survey);
+
+        $question->save();
+
+        return $question;
+    }
+
+    /**
+     * @param int $id
+     * @param array $attributes
+     * @return Question
+     */
+    function firstOrCreateQuestion($id, $attributes = [])
+    {
+        $question = isset($id) ?
+            Question::firstOrCreate(['question_id' => $id], $attributes) :
+            $this->createQuestion($attributes);
+
+        return $question;
+    }
+
+    /**
      * @param int $count
      * @param array $attributes
      * @return Collection
@@ -70,8 +84,11 @@ trait WithQuestion
     {
         $questions = $this->makeQuestions($count, $attributes);
 
-        $questions->each(function ($question) {
+        $survey = $this->firstOrCreateSurvey($attributes['survey_id'] ?? null);
+
+        $questions->each(function ($question) use ($survey) {
             /** @var Question $question */
+            $question->survey()->associate($survey);
            $question->save();
         });
 

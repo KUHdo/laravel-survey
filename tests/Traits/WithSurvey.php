@@ -27,19 +27,6 @@ trait WithSurvey
     }
 
     /**
-     * @param array $attributes
-     * @return Survey
-     */
-    function createSurvey($attributes = [])
-    {
-        $survey = $this->makeSurvey($attributes);
-
-        $survey->save();
-
-        return $survey;
-    }
-
-    /**
      * @param int $count
      * @param array $attributes
      * @return Collection
@@ -53,6 +40,33 @@ trait WithSurvey
         }
 
         return $surveys;
+    }
+
+    /**
+     * @param array $attributes
+     * @return Survey
+     */
+    function createSurvey($attributes = [])
+    {
+        $survey = $this->makeSurvey($attributes);
+
+        $survey->save();
+
+        return $survey;
+    }
+
+    /**
+     * @param int $id
+     * @param array $attributes
+     * @return Survey
+     */
+    function firstOrCreateSurvey($id, $attributes = [])
+    {
+        $survey = isset($id) ?
+            Survey::firstOrCreate(['survey_id' => $id], $attributes) :
+            $this->createSurvey($attributes);
+
+        return $survey;
     }
 
     /**

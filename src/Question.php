@@ -4,6 +4,11 @@ namespace Kuhdo\Survey;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Question
+ * @mixin \Illuminate\Database\Eloquent
+ * @package Kuhdo\Survey
+ */
 class Question extends Model
 {
     /**
@@ -16,6 +21,23 @@ class Question extends Model
     protected $fillable = [
         'category',
         'question',
-        'survey_id',
     ];
+
+    protected $guarded = ['id'];
+
+    /**
+     * Get the survey that owns the question
+     */
+    public function survey()
+    {
+        return $this->belongsTo('Kuhdo\Survey\Survey', 'survey_id');
+    }
+
+    /**
+     * Get the answers for the question
+     */
+    public function answers()
+    {
+        return $this->hasMany('Kuhdo\Survey\Answer');
+    }
 }

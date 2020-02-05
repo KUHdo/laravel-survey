@@ -18,13 +18,10 @@ class WithAnswerTest extends TestCase
      */
     public function testMakeAnswer()
     {
-        $answer = $this->makeAnswer([
-            'question_id' => 4711
-        ]);
+        $answer = $this->makeAnswer();
 
         $this->assertEquals('Test', $answer->value);
         $this->assertEquals('Test', $answer->type);
-        $this->assertEquals(4711, $answer->question_id);
     }
 
     /**
