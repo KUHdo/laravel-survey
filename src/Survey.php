@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Survey
  * @package Kuhdo\Survey
- * @mixin \Eloquent
  */
 class Survey extends Model
 {
