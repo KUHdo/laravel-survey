@@ -5,6 +5,7 @@ namespace Kuhdo\Survey\Tests\Traits;
 use Illuminate\Database\Eloquent\Collection;
 use Kuhdo\Survey\Answer;
 use Kuhdo\Survey\Question;
+use Kuhdo\Survey\Tests\User;
 
 /**
  * Trait WithAnswer
@@ -23,13 +24,9 @@ trait WithAnswer
         $default = [
             'value' => 'Test',
             'type' => 'Test',
-            'model_type' => 'Model',
-            'model_id' => 0,
         ];
 
-        $answer = new Answer(array_merge($default, $attributes));
-
-        return $answer;
+        return new Answer(array_merge($default, $attributes));
     }
 
     /**
@@ -59,6 +56,9 @@ trait WithAnswer
         $question = $this->firstOrCreateQuestion($attributes['question_id'] ?? null);
         $answer->question()->associate($question);
 
+        $user = User::create();
+        $answer->model()->associate($user);
+
         $answer->save();
 
         return $answer;
@@ -74,10 +74,12 @@ trait WithAnswer
         $answers = $this->makeAnswers($count, $attributes);
 
         $question = $this->firstOrCreateQuestion($attributes['question_id'] ?? null);
+        $user = User::create();
 
-        $answers->each(function ($answer) use ($question) {
+        $answers->each(function ($answer) use ($question, $user) {
             /** @var Answer $answer */
             $answer->question()->associate($question);
+            $answer->model()->associate($user);
             $answer->save();
         });
 

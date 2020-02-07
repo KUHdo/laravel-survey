@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Answer
- * @mixin \Illuminate\Database\Eloquent\Model
  * @package Kuhdo\Survey
  */
 class Answer extends Model
@@ -33,5 +32,14 @@ class Answer extends Model
     public function question()
     {
         return $this->belongsTo('Kuhdo\Survey\Question', 'question_id');
+    }
+
+    /**
+     * Get the owning answerable model
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function model()
+    {
+        return $this->morphTo();
     }
 }
