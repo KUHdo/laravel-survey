@@ -63,7 +63,7 @@ trait WithSurvey
     function firstOrCreateSurvey($id, $attributes = [])
     {
         $survey = isset($id) ?
-            Survey::firstOrCreate(['survey_id' => $id], $attributes) :
+            Survey::firstOrCreate(['id' => $id], $attributes) :
             $this->createSurvey($attributes);
 
         return $survey;

@@ -4,7 +4,7 @@ namespace Kuhdo\Survey\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait Voter
+trait Voteable
 {
     public function answers(): MorphMany
     {

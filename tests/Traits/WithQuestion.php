@@ -69,7 +69,7 @@ trait WithQuestion
     function firstOrCreateQuestion($id, $attributes = [])
     {
         $question = isset($id) ?
-            Question::firstOrCreate(['question_id' => $id], $attributes) :
+            Question::firstOrCreate(['id' => $id], $attributes) :
             $this->createQuestion($attributes);
 
         return $question;
