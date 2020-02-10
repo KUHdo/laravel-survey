@@ -3,11 +3,12 @@
 namespace Kuhdo\Survey\Tests;
 
 use Illuminate\Database\Eloquent\Model;
-use Kuhdo\Survey\Traits\Voter;
+use Kuhdo\Survey\Contracts\Voter\Voteable as VoteableContract;
+use Kuhdo\Survey\Traits\Voteable;
 
-class User extends Model
+class User extends Model implements VoteableContract
 {
-    use Voter;
+    use Voteable;
 
     protected $table = 'users';
 }

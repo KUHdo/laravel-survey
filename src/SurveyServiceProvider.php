@@ -5,6 +5,7 @@ namespace Kuhdo\Survey;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use Kuhdo\Survey\Repositories\Answer\AnswerRepository;
 
 class SurveyServiceProvider extends ServiceProvider
 {
@@ -40,6 +41,11 @@ class SurveyServiceProvider extends ServiceProvider
         $this->app->singleton('survey', function ($app) {
             return new Survey;
         });
+
+        $this->app->bind(
+            'Kuhdo\Survey\Repositories\Answer\AnswerRepository',
+            'Kuhdo\Survey\Repositories\Answer\EloquentAnswerRepository'
+        );
     }
 
     /**
