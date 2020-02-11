@@ -46,6 +46,11 @@ class SurveyServiceProvider extends ServiceProvider
             'Kuhdo\Survey\Repositories\Answer\AnswerRepository',
             'Kuhdo\Survey\Repositories\Answer\EloquentAnswerRepository'
         );
+
+        $this->app->bind(
+            'Kuhdo\Survey\Repositories\Question\QuestionRepository',
+            'Kuhdo\Survey\Repositories\Question\EloquentQuestionRepository'
+        );
     }
 
     /**

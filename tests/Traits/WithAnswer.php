@@ -4,6 +4,7 @@ namespace Kuhdo\Survey\Tests\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Kuhdo\Survey\Answer;
+use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
 use Kuhdo\Survey\Question;
 use Kuhdo\Survey\Tests\User;
 
@@ -65,6 +66,25 @@ trait WithAnswer
     }
 
     /**
+     * @param User $user
+     * @param array $attributes
+     * @return Answer
+     */
+    function createAnswerWithUser(User $user, $attributes = [])
+    {
+        $answer = $this->makeAnswer($attributes);
+
+        $question = $this->firstOrCreateQuestion($attributes['question_id'] ?? null);
+
+        $answer->question()->associate($question);
+        $answer->model()->associate($user);
+
+        $answer->save();
+
+        return $answer;
+    }
+
+    /**
      * @param int $count
      * @param array $attributes
      * @return Collection
@@ -76,7 +96,29 @@ trait WithAnswer
         $question = $this->firstOrCreateQuestion($attributes['question_id'] ?? null);
         $user = User::create();
 
-        $answers->each(function ($answer) use ($question, $user) {
+        $answers->each(function ($answer) use ($question, $user, $attributes) {
+            /** @var Answer $answer */
+            $answer->question()->associate($question);
+            $answer->model()->associate($user);
+            $answer->save();
+        });
+
+        return $answers;
+    }
+
+    /**
+     * @param User $user
+     * @param int $count
+     * @param array $attributes
+     * @return Collection
+     */
+    function createAnswersWithUser(User $user, $count = 1, $attributes = [])
+    {
+        $answers = $this->makeAnswers($count, $attributes);
+
+        $question = $this->firstOrCreateQuestion($attributes['question_id'] ?? null);
+
+        $answers->each(function ($answer) use ($question, $user, $attributes) {
             /** @var Answer $answer */
             $answer->question()->associate($question);
             $answer->model()->associate($user);

@@ -3,35 +3,46 @@
 
 namespace Kuhdo\Survey\Repositories\Answer;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
 use Kuhdo\Survey\Question;
 
 interface AnswerRepository
 {
     /**
-     * @param Voter $voter
+     * @return Collection
+     */
+    function getAll() : Collection;
+
+    /**
+     * @param $id
      * @return mixed
      */
-    function getAll(Voter $voter);
+    function getById($id);
 
     /**
      * @param Voter $voter
      * @return mixed
      */
-    function getLatest(Voter $voter);
+    function getAllOfVoter(Voter $voter);
+
+    /**
+     * @param Voter $voter
+     * @return mixed
+     */
+    function getLatestOfVoter(Voter $voter);
 
     /**
      * @param Voter $voter
      * @param Question $question
      * @return mixed
      */
-    function getAllOfQuestion(Voter $voter, Question $question);
+    function getAllOfVoterAndQuestion(Voter $voter, Question $question);
 
     /**
      * @param Voter $voter
      * @param Question $question
      * @return mixed
      */
-     function getLatestOfQuestion(Voter $voter, Question $question);
+     function getLatestOfVoterAndQuestion(Voter $voter, Question $question);
 }

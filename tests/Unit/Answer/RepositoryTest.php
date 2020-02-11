@@ -4,7 +4,7 @@ namespace Kuhdo\Survey\Tests\Unit\Answer;
 
 
 use Carbon\Carbon;
-use Kuhdo\Survey\Answer;
+use Illuminate\Database\Eloquent\Collection;
 use Kuhdo\Survey\Repositories\Answer\AnswerRepository;
 use Kuhdo\Survey\Tests\TestCase;
 use Kuhdo\Survey\Tests\Traits\WithAnswer;
@@ -27,6 +27,27 @@ class RepositoryTest extends TestCase
     }
 
     /**
+     * Should return Collection of Answer
+     */
+    public function testReturnAnswerCollection()
+    {
+        $this->createAnswers(3);
+
+        $this->assertInstanceOf(Collection::class, $this->answerRepo->getAll());
+        $this->assertEquals(3, $this->answerRepo->getAll()->count());
+    }
+
+    /**
+     * Should return Answer with certain id
+     */
+    public function testReturnAnswerById()
+    {
+        $answer = $this->createAnswer();
+
+        $this->assertTrue($answer->is($this->answerRepo->getById($answer->id)));
+    }
+
+    /**
      * Should bind correct concrete which is defined in Service
      */
     public function testAnswerRepoShouldBeInstanceOfEloquentRepository()
@@ -42,16 +63,13 @@ class RepositoryTest extends TestCase
         /** @var User $user */
         $user = User::create();
 
-        $firstAnswer = $this->createAnswer();
-        $firstAnswer->model()->associate($user);
-        $firstAnswer->save();
+        $this->createAnswerWithUser($user);
 
-        $latestAnswer = $this->createAnswer();
-        $latestAnswer->model()->associate($user);
+        $latestAnswer = $this->createAnswerWithUser($user);
         $latestAnswer->created_at = Carbon::now()->addMinute();
         $latestAnswer->save();
 
-        $this->assertTrue($latestAnswer->is($this->answerRepo->getLatest($user)));
+        $this->assertTrue($latestAnswer->is($this->answerRepo->getLatestOfVoter($user)));
     }
 
     /**
@@ -63,29 +81,23 @@ class RepositoryTest extends TestCase
         $user = User::create();
         $question = $this->createQuestion();
 
-        $firstAnswer = $this->createAnswer([
-            'question_id' => $question->id
+        $this->createAnswerWithUser($user, [
+            'question_id' => $question->id,
         ]);
-        $firstAnswer->model()->associate($user);
-        $firstAnswer->save();
-
 
         /* Create latest answer of certain question */
-        $latestAnswerOfQuestion = $this->createAnswer([
+        $latestAnswerOfQuestion = $this->createAnswerWithUser($user, [
             'question_id' => $question->id
         ]);
-        $latestAnswerOfQuestion->model()->associate($user);
         $latestAnswerOfQuestion->created_at = Carbon::now()->addMinute();
         $latestAnswerOfQuestion->save();
 
-
         /* Create latest answer not related to mentioned question */
-        $latestAnswerOfAll = $this->createAnswer();
-        $latestAnswerOfAll->model()->associate($user);
+        $latestAnswerOfAll = $this->createAnswerWithUser($user);
         $latestAnswerOfAll->created_at = Carbon::now()->addHour();
         $latestAnswerOfAll->save();
 
-        $this->assertTrue($latestAnswerOfAll->is($this->answerRepo->getLatest($user)));
-        $this->assertTrue($latestAnswerOfQuestion->is($this->answerRepo->getLatestOfQuestion($user, $question)));
+        $this->assertTrue($latestAnswerOfAll->is($this->answerRepo->getLatestOfVoter($user)));
+        $this->assertTrue($latestAnswerOfQuestion->is($this->answerRepo->getLatestOfVoterAndQuestion($user, $question)));
     }
 }
