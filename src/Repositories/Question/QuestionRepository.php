@@ -35,8 +35,15 @@ interface QuestionRepository
 
     /**
      * @param Survey $survey
-     * @return mixed
+     * @return Collection
      */
-    function getAllOfSurvey(Survey $survey);
+    function getAllOfSurvey(Survey $survey): Collection;
+
+    /**
+     * @param Survey $survey
+     * @param Voter $voter
+     * @return Collection
+     */
+    function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection;
 
 }

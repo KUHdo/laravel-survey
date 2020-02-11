@@ -51,10 +51,22 @@ class EloquentQuestionRepository implements QuestionRepository
 
     /**
      * @param Survey $survey
-     * @return mixed
+     * @return Collection
      */
-    function getAllOfSurvey(Survey $survey)
+    function getAllOfSurvey(Survey $survey): Collection
     {
         return Question::all()->where('survey_id', $survey->id);
+    }
+
+    /**
+     * @param Survey $survey
+     * @param Voter $voter
+     * @return Collection
+     */
+    function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection
+    {
+        return Question::with(['answers' => function($query) use ($voter) {
+            $query->where('model_id', '=', $voter->id);
+        }])->where('survey_id', '=', $survey->id)->get();
     }
 }

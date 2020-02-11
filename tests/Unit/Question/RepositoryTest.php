@@ -85,4 +85,22 @@ class RepositoryTest extends TestCase
 
         $this->assertEquals(3, $this->questionRepo->getByIdWithAnswersOfVoter($question->id, $user)->answers->count());
     }
+
+    /**
+     * Should return Question Collection of given survey
+     */
+    public function testReturnQuestionsOfSurveyWithAnswersOfVoter()
+    {
+        $user = User::create();
+        $survey = $this->createSurvey();
+
+        $questions = $this->createQuestions(3, [ 'survey_id' => $survey->id ]);
+
+        $questions->each(function ($question) use ($user) {
+            $this->createAnswersWithUser($user, 2, [ 'question_id' => $question->id ]);
+        });
+
+        $this->assertEquals(3, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->count());
+        $this->assertEquals(2, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->first()->answers->count());
+    }
 }
