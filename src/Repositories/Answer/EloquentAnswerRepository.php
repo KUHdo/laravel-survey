@@ -3,7 +3,6 @@
 
 namespace Kuhdo\Survey\Repositories\Answer;
 
-use Illuminate\Database\Eloquent\Builder;
 use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
 use Kuhdo\Survey\Question;
 
