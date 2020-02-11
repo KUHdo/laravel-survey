@@ -3,11 +3,30 @@
 
 namespace Kuhdo\Survey\Repositories\Answer;
 
+use Illuminate\Database\Eloquent\Collection;
+use Kuhdo\Survey\Answer;
 use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
 use Kuhdo\Survey\Question;
 
 class EloquentAnswerRepository implements AnswerRepository
 {
+    /**
+     * @return mixed|void
+     */
+    function getAll() : Collection
+    {
+        return Answer::all();
+    }
+
+    /**
+     * @param $id
+     * @return mixed|void
+     */
+    function getById($id)
+    {
+        return Answer::find($id);
+    }
+
     /**
      * @param Voter $voter
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -21,7 +40,7 @@ class EloquentAnswerRepository implements AnswerRepository
      * @param Voter $voter
      * @return mixed
      */
-    public function getAll(Voter $voter)
+    public function getAllOfVoter(Voter $voter)
     {
         return $this->getAllBuilder($voter)->getResults();
     }
@@ -30,7 +49,7 @@ class EloquentAnswerRepository implements AnswerRepository
      * @param Voter $voter
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\MorphMany|mixed|object|null
      */
-    public function getLatest(Voter $voter)
+    public function getLatestOfVoter(Voter $voter)
     {
         return $this->getAllBuilder($voter)->latest()->first();
     }
@@ -50,7 +69,7 @@ class EloquentAnswerRepository implements AnswerRepository
      * @param Question $question
      * @return mixed
      */
-    public function getAllOfQuestion(Voter $voter, Question $question)
+    public function getAllOfVoterAndQuestion(Voter $voter, Question $question)
     {
         return $this->getAllOfQuestionBuilder($voter, $question)->getResults();
     }
@@ -60,7 +79,7 @@ class EloquentAnswerRepository implements AnswerRepository
      * @param Question $question
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\MorphMany|mixed|object|null
      */
-    public function getLatestOfQuestion(Voter $voter, Question $question)
+    public function getLatestOfVoterAndQuestion(Voter $voter, Question $question)
     {
         return $this->getAllOfQuestionBuilder($voter, $question)->latest()->first();
     }
