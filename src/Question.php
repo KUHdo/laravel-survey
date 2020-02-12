@@ -20,6 +20,8 @@ class Question extends Model
     protected $fillable = [
         'category',
         'question',
+        'created_at',
+        'updated_at'
     ];
 
     protected $guarded = ['id'];

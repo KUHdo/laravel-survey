@@ -18,7 +18,9 @@ class Survey extends Model
     protected $table = 'surveys';
 
     protected $fillable = [
-        'title'
+        'title',
+        'created_at',
+        'updated_at',
     ];
 
     protected $guarded = ['id'];
