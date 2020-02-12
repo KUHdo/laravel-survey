@@ -2,7 +2,7 @@
 version: 2
 
 variables:
-  version: 0.1.4
+  version: 0.1.5
   repositoryUsername: EMalyj
   repositoryPassword: BAMSCRT@0@0@x7nannRBRK1+k8GFESFQrg==
   projectName: laravel-survey

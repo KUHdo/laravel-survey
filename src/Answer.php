@@ -20,6 +20,8 @@ class Answer extends Model
     protected $fillable = [
         'type',
         'value',
+        'created_at',
+        'updated_at',
         'model_type',
         'model_id'
     ];
