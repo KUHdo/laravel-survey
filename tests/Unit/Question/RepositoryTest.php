@@ -87,7 +87,7 @@ class RepositoryTest extends TestCase
     }
 
     /**
-     * Should return Question Collection of given survey
+     * Should return Question Collection of given survey with answers and given voter
      */
     public function testReturnQuestionsOfSurveyWithAnswersOfVoter()
     {

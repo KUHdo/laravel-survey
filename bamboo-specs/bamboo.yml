@@ -2,7 +2,7 @@
 version: 2
 
 variables:
-  version: 0.1.5
+  version: 0.1.6
   repositoryUsername: EMalyj
   repositoryPassword: BAMSCRT@0@0@x7nannRBRK1+k8GFESFQrg==
   projectName: laravel-survey
@@ -37,7 +37,6 @@ Publish to repository:
     - script:
         - rm -rf bamboo-specs
         - rm composer.lock
-        - rm -rf tests
         - rm phpunit.xml
         - zip -r ${bamboo.projectName} *
         - curl -v --user '${bamboo.repositoryUsername}:${bamboo.repositoryPassword}' --upload-file ${bamboo.projectName}.zip https://registry.kuhdo.de/repository/packages/packages/upload/kuhdo/${bamboo.projectName}/${bamboo.version}
