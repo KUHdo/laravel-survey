@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuhdo\Survey\Tests\Unit\Answer;
+namespace Kuhdo\Survey\Tests\Unit\Repositories\Answer;
 
 
 use Carbon\Carbon;
