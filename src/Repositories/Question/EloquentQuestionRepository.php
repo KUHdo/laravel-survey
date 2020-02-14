@@ -4,6 +4,7 @@
 namespace Kuhdo\Survey\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kuhdo\Survey\Answer;
 use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
 use Kuhdo\Survey\Question;
@@ -45,7 +46,21 @@ class EloquentQuestionRepository implements QuestionRepository
     function getByIdWithAnswersOfVoter($id, Voter $voter)
     {
         return Question::with(['answers' => function($query) use ($voter) {
+            /** @var HasMany $query */
             $query->where('model_id', '=', $voter->id);
+        }])->where('id', '=', $id)->first();
+    }
+
+    /**
+     * @param $id
+     * @param Voter $voter
+     * @return mixed
+     */
+    function getByIdWithLatestAnswerOfVoter($id, Voter $voter)
+    {
+        return Question::with(['answers' => function($query) use ($voter) {
+            /** @var HasMany $query */
+            $query->where('model_id', '=', $voter->id)->latest()->first();
         }])->where('id', '=', $id)->first();
     }
 
@@ -66,7 +81,21 @@ class EloquentQuestionRepository implements QuestionRepository
     function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection
     {
         return Question::with(['answers' => function($query) use ($voter) {
+            /** @var HasMany $query */
             $query->where('model_id', '=', $voter->id);
+        }])->where('survey_id', '=', $survey->id)->get();
+    }
+
+    /**
+     * @param Survey $survey
+     * @param Voter $voter
+     * @return Collection
+     */
+    function getAllOfSurveyWithLatestAnswerOfVoter(Survey $survey, Voter $voter): Collection
+    {
+        return Question::with(['answers' => function($query) use ($voter) {
+            /** @var HasMany $query */
+            $query->where('model_id', '=', $voter->id)->latest()->first();
         }])->where('survey_id', '=', $survey->id)->get();
     }
 }
