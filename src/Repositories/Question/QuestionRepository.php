@@ -34,13 +34,6 @@ interface QuestionRepository
     function getByIdWithAnswersOfVoter($id, Voter $voter);
 
     /**
-     * @param $id
-     * @param Voter $voter
-     * @return mixed
-     */
-    function getByIdWithLatestAnswerOfVoter($id, Voter $voter);
-
-    /**
      * @param Survey $survey
      * @return Collection
      */
@@ -52,11 +45,4 @@ interface QuestionRepository
      * @return Collection
      */
     function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection;
-
-    /**
-     * @param Survey $survey
-     * @param Voter $voter
-     * @return Collection
-     */
-    function getAllOfSurveyWithLatestAnswerOfVoter(Survey $survey, Voter $voter): Collection;
 }

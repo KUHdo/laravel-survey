@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kuhdo\Survey\Tests\Unit\Question;
+namespace Kuhdo\Survey\Tests\Unit\Repositories\Question;
 
 
 use Illuminate\Database\Eloquent\Collection;
@@ -87,20 +87,6 @@ class RepositoryTest extends TestCase
     }
 
     /**
-     * Should return certain question with latest related answer of given voter
-     */
-    public function testReturnQuestionWithLatestAnswerAndVoter()
-    {
-        $user = User::create();
-        $question = $this->createQuestion();
-
-        $this->createAnswersWithUser($user, 3, [ 'question_id' => $question->id ]);
-        $this->createAnswers( 3, [ 'question_id' => $question->id ]);
-
-        $this->assertEquals(1, $this->questionRepo->getByIdWithLatestAnswerOfVoter($question->id, $user)->answers->count());
-    }
-
-    /**
      * Should return Question Collection of given survey with answers and given voter
      */
     public function testReturnQuestionsOfSurveyWithAnswersOfVoter()
@@ -116,23 +102,5 @@ class RepositoryTest extends TestCase
 
         $this->assertEquals(3, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->count());
         $this->assertEquals(2, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->first()->answers->count());
-    }
-
-    /**
-     * Should return Question Collection of given survey with latest answer and given voter
-     */
-    public function testReturnQuestionsOfSurveyWithLatestAnswerOfVoter()
-    {
-        $user = User::create();
-        $survey = $this->createSurvey();
-
-        $questions = $this->createQuestions(3, [ 'survey_id' => $survey->id ]);
-
-        $questions->each(function ($question) use ($user) {
-            $this->createAnswersWithUser($user, 2, [ 'question_id' => $question->id ]);
-        });
-
-        $this->assertEquals(3, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->count());
-        $this->assertEquals(1, $this->questionRepo->getAllOfSurveyWithLatestAnswerOfVoter($survey, $user)->first()->answers->count());
     }
 }
