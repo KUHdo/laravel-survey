@@ -4,11 +4,16 @@ namespace Kuhdo\Survey;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Illuminate\Support\ServiceProvider;
-use Kuhdo\Survey\Repositories\Answer\AnswerRepository;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class SurveyServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        'Kuhdo\Survey\Survey' => 'App\Policies\SurveyPolicy',
+        'Kuhdo\Survey\Question' => 'App\Policies\QuestionPolicy',
+        'Kuhdo\Survey\Answer' => 'App\Policies\AnswerPolicy',
+    ];
+
     /**
      * Perform post-registration booting of services.
      *
@@ -26,6 +31,8 @@ class SurveyServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole($filesystem);
         }
+
+        $this->registerPolicies();
     }
 
     /**
@@ -79,6 +86,18 @@ class SurveyServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/create_survey_tables.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__.'/../stubs/SurveyPolicy.stub' => app_path('Policies/SurveyPolicy.php'),
+        ], 'survey-policy');
+
+        $this->publishes([
+            __DIR__.'/../stubs/QuestionPolicy.stub' => app_path('Policies/QuestionPolicy.php'),
+        ], 'question-policy');
+
+        $this->publishes([
+            __DIR__.'/../stubs/AnswerPolicy.stub' => app_path('Policies/AnswerPolicy.php'),
+        ], 'answer-policy');
 
         // Publishing the views.
         /*$this->publishes([
