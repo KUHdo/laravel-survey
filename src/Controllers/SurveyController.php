@@ -22,7 +22,7 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny', Survey::class);
     }
 
     /**
