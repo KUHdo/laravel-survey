@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 class SurveyController extends Controller
 {
     /**
+     * SurveyController constructor.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Survey::class, 'survey');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

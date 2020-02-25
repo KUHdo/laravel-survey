@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
     /**
+     * QuestionController constructor.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Question::class, 'question');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
