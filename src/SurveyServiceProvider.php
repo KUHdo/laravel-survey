@@ -4,15 +4,11 @@ namespace Kuhdo\Survey;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class SurveyServiceProvider extends ServiceProvider
 {
-    protected $policies = [
-        'Kuhdo\Survey\Survey' => 'App\Policies\SurveyPolicy',
-        'Kuhdo\Survey\Question' => 'App\Policies\QuestionPolicy',
-        'Kuhdo\Survey\Answer' => 'App\Policies\AnswerPolicy',
-    ];
 
     /**
      * Perform post-registration booting of services.
@@ -22,17 +18,27 @@ class SurveyServiceProvider extends ServiceProvider
      */
     public function boot(Filesystem $filesystem)
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'kuhdo');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'kuhdo');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->registerRoutes();
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole($filesystem);
         }
+    }
 
-        $this->registerPolicies();
+    /**
+     * Register the Survey routes.
+     *
+     * @return void
+     */
+    protected function registerRoutes()
+    {
+        Route::group([
+            'namespace' => 'Kuhdo\Survey\Controllers',
+            'prefix' => 'survey'
+        ], function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        });
     }
 
     /**
@@ -88,6 +94,18 @@ class SurveyServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
+            __DIR__.'/../stubs/SurveyServiceProvider.stub' => app_path('Policies/SurveyServiceProvider.php'),
+        ], 'horizon-provider');
+
+        $this->publishPolicies();
+    }
+
+    /**
+     * Publishes policies
+     */
+    protected function publishPolicies()
+    {
+        $this->publishes([
             __DIR__.'/../stubs/SurveyPolicy.stub' => app_path('Policies/SurveyPolicy.php'),
         ], 'survey-policy');
 
@@ -98,24 +116,6 @@ class SurveyServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../stubs/AnswerPolicy.stub' => app_path('Policies/AnswerPolicy.php'),
         ], 'answer-policy');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/kuhdo'),
-        ], 'survey.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/kuhdo'),
-        ], 'survey.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/kuhdo'),
-        ], 'survey.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
     }
 
     /**

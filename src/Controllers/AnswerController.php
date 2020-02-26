@@ -12,7 +12,7 @@ class AnswerController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Answer::class, 'answer');
+        // $this->authorizeResource(Answer::class, 'answer');
     }
 
     /**
@@ -22,7 +22,8 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny', Answer::class);
+        return response()->json();
     }
 
     /**
