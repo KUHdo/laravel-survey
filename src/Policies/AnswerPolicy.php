@@ -29,7 +29,9 @@ class AnswerPolicy
      */
     public function view($user, Answer $answer)
     {
-        //
+        var_dump($answer->model());
+        var_dump($user);
+        return $answer->model()->get() === $user;
     }
 
     /**
