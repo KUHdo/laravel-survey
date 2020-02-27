@@ -9,8 +9,6 @@ class IndexAnswer extends Handler
 {
     public function __invoke()
     {
-        $this->authorize('viewAny', Answer::class);
-
         return Answer::all();
     }
 }

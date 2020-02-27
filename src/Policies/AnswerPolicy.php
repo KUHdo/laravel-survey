@@ -29,9 +29,7 @@ class AnswerPolicy
      */
     public function view($user, Answer $answer)
     {
-        var_dump($answer->model());
-        var_dump($user);
-        return $answer->model()->get() === $user;
+        return $answer->model()->first()->is($user);
     }
 
     /**
@@ -42,7 +40,7 @@ class AnswerPolicy
      */
     public function create($user)
     {
-        //
+        return $user->exists();
     }
 
     /**
@@ -54,7 +52,7 @@ class AnswerPolicy
      */
     public function update($user, Answer $answer)
     {
-        //
+        return $answer->model()->first()->is($user);
     }
 
     /**
@@ -66,7 +64,7 @@ class AnswerPolicy
      */
     public function delete($user, Answer $answer)
     {
-        //
+        return $answer->model()->first()->is($user);
     }
 
     /**
@@ -78,7 +76,7 @@ class AnswerPolicy
      */
     public function restore($user, Answer $answer)
     {
-        //
+        return false;
     }
 
     /**
@@ -90,6 +88,6 @@ class AnswerPolicy
      */
     public function forceDelete($user, Answer $answer)
     {
-        //
+        return false;
     }
 }
