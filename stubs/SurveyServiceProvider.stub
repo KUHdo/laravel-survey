@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Providers;
+
+use Kuhdo\Survey\SurveyApplicationServiceProvider;
+
+class SurveyServiceProvider extends SurveyApplicationServiceProvider
+{
+    protected $policies = [
+        'Kuhdo\Survey\Survey' => 'App\Policies\SurveyPolicy',
+        'Kuhdo\Survey\Question' => 'App\Policies\QuestionPolicy',
+        'Kuhdo\Survey\Answer' => 'App\Policies\AnswerPolicy',
+    ];
+
+    /**
+     * Perform post-registration booting of services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
+    }
+}
