@@ -2,7 +2,6 @@
 
 namespace Kuhdo\Survey\Policies;
 
-use App\User;
 use Kuhdo\Survey\Survey;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,82 +12,82 @@ class SurveyPolicy
     /**
      * Determine whether the user can view any surveys.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny($user)
     {
-        //
+        return $user->exists();
     }
 
     /**
      * Determine whether the user can view the survey.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @param  Survey  $survey
      * @return mixed
      */
-    public function view(User $user, Survey $survey)
+    public function view($user, Survey $survey)
     {
-        //
+        return $user->exists();
     }
 
     /**
      * Determine whether the user can create surveys.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create($user)
     {
-        //
+        return $user->exists();
     }
 
     /**
      * Determine whether the user can update the survey.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @param  Survey  $survey
      * @return mixed
      */
-    public function update(User $user, Survey $survey)
+    public function update($user, Survey $survey)
     {
-        //
+        return $user->exists();
     }
 
     /**
      * Determine whether the user can delete the survey.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @param  Survey  $survey
      * @return mixed
      */
-    public function delete(User $user, Survey $survey)
+    public function delete($user, Survey $survey)
     {
-        //
+        return $user->exists();
     }
 
     /**
      * Determine whether the user can restore the survey.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @param  Survey  $survey
      * @return mixed
      */
-    public function restore(User $user, Survey $survey)
+    public function restore($user, Survey $survey)
     {
-        //
+        return $user->exists();
     }
 
     /**
      * Determine whether the user can permanently delete the survey.
      *
-     * @param  \App\User  $user
+     * @param  $user
      * @param  Survey  $survey
      * @return mixed
      */
-    public function forceDelete(User $user, Survey $survey)
+    public function forceDelete($user, Survey $survey)
     {
-        //
+        return $user->exists();
     }
 }

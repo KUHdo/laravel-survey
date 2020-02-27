@@ -3,9 +3,6 @@
 
 namespace Kuhdo\Survey\Tests\Feature\Controllers;
 
-
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Kuhdo\Survey\Answer;
 use Kuhdo\Survey\Tests\TestCase;
 use Kuhdo\Survey\Tests\Traits\WithAnswer;
 use Kuhdo\Survey\Tests\User;

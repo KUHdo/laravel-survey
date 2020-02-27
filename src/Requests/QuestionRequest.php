@@ -21,7 +21,9 @@ class QuestionRequest extends FormRequest
     protected function registerRules()
     {
         return [
-            'title' => 'required|string',
+            'question' => 'required|string',
+            'category' => 'required|string',
+            'survey_id' => 'sometimes|required|integer',
         ];
     }
 
@@ -32,7 +34,8 @@ class QuestionRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => __('Der Titel ist ein Pflichtfeld'),
+            'question' => __('Question'),
+            'category' => __('Category'),
         ];
     }
 }
