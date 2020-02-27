@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Kuhdo\Survey\Contracts\Voter\Voteable as VoteableContract;
 use Kuhdo\Survey\Traits\Voteable;
 
-class User extends Model implements VoteableContract
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable implements VoteableContract
 {
     use Voteable;
 
