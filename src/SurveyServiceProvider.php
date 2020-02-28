@@ -35,7 +35,8 @@ class SurveyServiceProvider extends ServiceProvider
     {
         Route::group([
             'namespace' => 'Kuhdo\Survey\Controllers',
-            'prefix' => 'survey'
+            'prefix' => 'survey',
+            'middleware' => 'web'
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
