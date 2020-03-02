@@ -4,6 +4,7 @@
 namespace Kuhdo\Survey\Tests\Feature\Controllers;
 
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Kuhdo\Survey\Question;
 use Kuhdo\Survey\Tests\TestCase;
 use Kuhdo\Survey\Tests\Traits\WithQuestion;
@@ -12,6 +13,7 @@ use Kuhdo\Survey\Tests\User;
 class QuestionControllerTest extends TestCase
 {
     use WithQuestion;
+    use WithoutMiddleware;
 
     public function testIndex()
     {
