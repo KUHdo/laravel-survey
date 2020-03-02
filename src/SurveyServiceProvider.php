@@ -94,7 +94,7 @@ class SurveyServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../stubs/SurveyServiceProvider.stub' => app_path('Policies/SurveyServiceProvider.php'),
+            __DIR__.'/../stubs/SurveyServiceProvider.stub' => app_path('Providers/SurveyServiceProvider.php'),
         ], 'horizon-provider');
 
         $this->publishPolicies();
