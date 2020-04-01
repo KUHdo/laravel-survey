@@ -1,24 +1,18 @@
 ---
 version: 2
 
-variables:
-  version: 0.9.1
-  repositoryUsername: EMalyj
-  repositoryPassword: BAMSCRT@0@0@x7nannRBRK1+k8GFESFQrg==
-  projectName: laravel-survey
+branches:
+  create: for-pull-request
 
 plan:
   project-key: LVLSUR
-  key: TAP
-  name: Test and publish
+  key: TEST
+  name: Test
 
 stages:
   - Run tests:
       jobs:
         - Run PHPUnit
-  - Publish code:
-      jobs:
-        - Publish to repository
 
 Run PHPUnit:
   tasks:
@@ -32,11 +26,37 @@ Run PHPUnit:
   requirements:
     - Composer
 
-Publish to repository:
+---
+version: 2
+
+deployment:
+  name: Laravel Survey
+  source-plan: LVLSUR-TEST
+
+release-naming:
+  next-version-name: release-1.1
+  auto-increment: true
+
+environments:
+  - Production
+
+Production:
+  variables:
+    version: 0.9.1
+    repositoryUsername: EMalyj
+    repositoryPassword: BAMSCRT@0@0@x7nannRBRK1+k8GFESFQrg==
+    projectName: laravel-survey
   tasks:
+    - clean
+    - artifact-download
     - script:
         - rm -rf bamboo-specs
         - rm composer.lock
         - rm phpunit.xml
         - zip -r ${bamboo.projectName} *
         - curl -v --user '${bamboo.repositoryUsername}:${bamboo.repositoryPassword}' --upload-file ${bamboo.projectName}.zip https://registry.kuhdo.de/repository/packages/packages/upload/kuhdo/${bamboo.projectName}/${bamboo.version}
+  requirements:
+    - Composer
+  triggers:
+    - build-success
+
