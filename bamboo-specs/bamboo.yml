@@ -26,6 +26,7 @@ Run PHPUnit:
   requirements:
     - Composer
 
+
 ---
 version: 2
 
