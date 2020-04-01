@@ -25,6 +25,11 @@ Run PHPUnit:
         test-results: "**/test-reports/*.xml"
   requirements:
     - Composer
+  artifacts:
+    -
+      name: Source
+      pattern: '**/*'
+      required: true
 
 
 ---
