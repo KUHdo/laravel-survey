@@ -15,14 +15,11 @@
     "Laravel",
     "Survey"
   ],
-  "require": {
-    "illuminate/support": "~5|~6"
-  },
   "require-dev": {
     "phpunit/phpunit": "^8.0",
     "mockery/mockery": "^1.1",
-    "orchestra/testbench": "~3|~4",
-    "sempro/phpunit-pretty-print": "^1.0"
+    "sempro/phpunit-pretty-print": "^1.0",
+    "orchestra/testbench": "^5.1"
   },
   "scripts": {
     "test": "phpunit"
@@ -46,5 +43,8 @@
         "Survey": "Kuhdo\\Survey\\Facades\\Survey"
       }
     }
+  },
+  "require": {
+    "illuminate/support": "^7.5"
   }
 }
