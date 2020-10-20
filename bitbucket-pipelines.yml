@@ -13,13 +13,6 @@ pipelines:
             name: Test
             script:
               - composer install
-              -  ./vendor/bin/phpunit test
-            caches:
-              - composer
-        - step:
-            name: Lint
-            script:
-              - composer install
-              - ./vendor/bin/phplint . --exclude=vendor
+              -  ./vendor/bin/phpunit
             caches:
               - composer
