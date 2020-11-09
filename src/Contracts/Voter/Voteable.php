@@ -3,7 +3,6 @@
 
 namespace Kuhdo\Survey\Contracts\Voter;
 
-
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface Voteable

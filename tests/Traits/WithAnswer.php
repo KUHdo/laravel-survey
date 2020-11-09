@@ -20,7 +20,7 @@ trait WithAnswer
      * @param array $attributes
      * @return Answer
      */
-    function makeAnswer($attributes = [])
+    protected function makeAnswer($attributes = [])
     {
         $default = [
             'value' => 'Test',
@@ -35,7 +35,7 @@ trait WithAnswer
      * @param array $attributes
      * @return Collection
      */
-    function makeAnswers($count = 1, $attributes = [])
+    protected function makeAnswers($count = 1, $attributes = [])
     {
         $answers = new Collection();
 
@@ -50,7 +50,7 @@ trait WithAnswer
      * @param array $attributes
      * @return Answer
      */
-    function createAnswer($attributes = [])
+    protected function createAnswer($attributes = [])
     {
         $answer = $this->makeAnswer($attributes);
 
@@ -70,7 +70,7 @@ trait WithAnswer
      * @param array $attributes
      * @return Answer
      */
-    function createAnswerWithUser(User $user, $attributes = [])
+    protected function createAnswerWithUser(User $user, $attributes = [])
     {
         $answer = $this->makeAnswer($attributes);
 
@@ -89,7 +89,7 @@ trait WithAnswer
      * @param array $attributes
      * @return Collection
      */
-    function createAnswers($count = 1, $attributes = [])
+    protected function createAnswers($count = 1, $attributes = [])
     {
         $answers = $this->makeAnswers($count, $attributes);
 
@@ -112,7 +112,7 @@ trait WithAnswer
      * @param array $attributes
      * @return Collection
      */
-    function createAnswersWithUser(User $user, $count = 1, $attributes = [])
+    protected function createAnswersWithUser(User $user, $count = 1, $attributes = [])
     {
         $answers = $this->makeAnswers($count, $attributes);
 

@@ -2,6 +2,7 @@ vendor
 build
 composer.phar
 .phpunit.result.cache
+test-reports
 report
 .DS_Store
 .idea/

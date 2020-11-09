@@ -15,7 +15,7 @@ class EloquentQuestionRepository implements QuestionRepository
     /**
      * @return Collection
      */
-    function getAll(): Collection
+    public function getAll(): Collection
     {
         return Question::all();
     }
@@ -24,7 +24,7 @@ class EloquentQuestionRepository implements QuestionRepository
      * @param $id
      * @return mixed
      */
-    function getById($id)
+    public function getById($id)
     {
         return Question::find($id);
     }
@@ -33,7 +33,7 @@ class EloquentQuestionRepository implements QuestionRepository
      * @param $id
      * @return mixed
      */
-    function getByIdWithAnswers($id)
+    public function getByIdWithAnswers($id)
     {
         return Question::with('answers')->where('id', '=', $id)->first();
     }
@@ -43,9 +43,9 @@ class EloquentQuestionRepository implements QuestionRepository
      * @param Voter $voter
      * @return mixed
      */
-    function getByIdWithAnswersOfVoter($id, Voter $voter)
+    public function getByIdWithAnswersOfVoter($id, Voter $voter)
     {
-        return Question::with(['answers' => function($query) use ($voter) {
+        return Question::with(['answers' => function ($query) use ($voter) {
             /** @var HasMany $query */
             $query->where('model_id', '=', $voter->id)->latest();
         }])->where('id', '=', $id)->first();
@@ -55,7 +55,7 @@ class EloquentQuestionRepository implements QuestionRepository
      * @param Survey $survey
      * @return Collection
      */
-    function getAllOfSurvey(Survey $survey): Collection
+    public function getAllOfSurvey(Survey $survey): Collection
     {
         return Question::all()->where('survey_id', $survey->id);
     }
@@ -65,9 +65,9 @@ class EloquentQuestionRepository implements QuestionRepository
      * @param Voter $voter
      * @return Collection
      */
-    function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection
+    public function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection
     {
-        return Question::with(['answers' => function($query) use ($voter) {
+        return Question::with(['answers' => function ($query) use ($voter) {
             /** @var HasMany $query */
             $query->where('model_id', '=', $voter->id)->latest();
         }])->where('survey_id', '=', $survey->id)->get();

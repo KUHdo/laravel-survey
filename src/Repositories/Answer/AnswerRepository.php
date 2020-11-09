@@ -12,37 +12,37 @@ interface AnswerRepository
     /**
      * @return Collection
      */
-    function getAll() : Collection;
+    public function getAll() : Collection;
 
     /**
      * @param $id
      * @return mixed
      */
-    function getById($id);
+    public function getById($id);
 
     /**
      * @param Voter $voter
      * @return mixed
      */
-    function getAllOfVoter(Voter $voter);
+    public function getAllOfVoter(Voter $voter);
 
     /**
      * @param Voter $voter
      * @return mixed
      */
-    function getLatestOfVoter(Voter $voter);
-
-    /**
-     * @param Voter $voter
-     * @param Question $question
-     * @return mixed
-     */
-    function getAllOfVoterAndQuestion(Voter $voter, Question $question);
+    public function getLatestOfVoter(Voter $voter);
 
     /**
      * @param Voter $voter
      * @param Question $question
      * @return mixed
      */
-     function getLatestOfVoterAndQuestion(Voter $voter, Question $question);
+    public function getAllOfVoterAndQuestion(Voter $voter, Question $question);
+
+    /**
+     * @param Voter $voter
+     * @param Question $question
+     * @return mixed
+     */
+    public function getLatestOfVoterAndQuestion(Voter $voter, Question $question);
 }

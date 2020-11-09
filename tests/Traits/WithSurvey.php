@@ -15,7 +15,7 @@ trait WithSurvey
      * @param array $attributes
      * @return Survey
      */
-    function makeSurvey($attributes = [])
+    protected function makeSurvey($attributes = [])
     {
         $default = [
             'title' => 'Test'
@@ -31,7 +31,7 @@ trait WithSurvey
      * @param array $attributes
      * @return Collection
      */
-    function makeSurveys($count = 1, $attributes = [])
+    protected function makeSurveys($count = 1, $attributes = [])
     {
         $surveys = new Collection();
 
@@ -46,7 +46,7 @@ trait WithSurvey
      * @param array $attributes
      * @return Survey
      */
-    function createSurvey($attributes = [])
+    protected function createSurvey($attributes = [])
     {
         $survey = $this->makeSurvey($attributes);
 
@@ -60,7 +60,7 @@ trait WithSurvey
      * @param array $attributes
      * @return Survey
      */
-    function firstOrCreateSurvey($id, $attributes = [])
+    protected function firstOrCreateSurvey($id, $attributes = [])
     {
         $survey = isset($id) ?
             Survey::firstOrCreate(['id' => $id], $attributes) :
@@ -74,13 +74,13 @@ trait WithSurvey
      * @param array $attributes
      * @return Collection
      */
-    function createSurveys($count = 1, $attributes = [])
+    protected function createSurveys($count = 1, $attributes = [])
     {
         $surveys = $this->makeSurveys($count, $attributes);
 
         $surveys->each(function ($survey) {
             /** @var Survey $survey */
-           $survey->save();
+            $survey->save();
         });
 
         return $surveys;

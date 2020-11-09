@@ -13,7 +13,7 @@ class EloquentAnswerRepository implements AnswerRepository
     /**
      * @return mixed|void
      */
-    function getAll() : Collection
+    public function getAll() : Collection
     {
         return Answer::all();
     }
@@ -22,7 +22,7 @@ class EloquentAnswerRepository implements AnswerRepository
      * @param $id
      * @return mixed|void
      */
-    function getById($id)
+    public function getById($id)
     {
         return Answer::find($id);
     }

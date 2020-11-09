@@ -5,14 +5,30 @@
 
 image: composer:2.0
 
+definitions:
+  steps:
+    - step: &testing
+        name: Test
+        caches:
+          - composer
+        script:
+          - composer install
+          - ./vendor/bin/phpunit --configuration phpunit.xml --log-junit ./test-reports/composer-report.xml
+        artifacts:
+          - ./test-reports/*
+    - step: &code-quality
+        name: Code-Quality
+        caches:
+          - composer
+        script:
+          - composer install
+          - mkdir -p test-reports
+          - ./vendor/bin/phpcs -sw --standard=phpcs.xml --basepath=. --report=junit --report-file=./test-reports/phpcs-report.xml
+        artifacts:
+          - ./test-reports/*
 
 pipelines:
-  default:
-    - parallel:
-        - step:
-            name: Test
-            script:
-              - composer install
-              -  ./vendor/bin/phpunit
-            caches:
-              - composer
+  pull-requests:
+    '**':
+      - step: *testing
+      - step: *code-quality

@@ -3,7 +3,6 @@
 
 namespace Kuhdo\Survey\Tests\Feature\Controllers;
 
-
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Kuhdo\Survey\Question;
 use Kuhdo\Survey\Tests\TestCase;
