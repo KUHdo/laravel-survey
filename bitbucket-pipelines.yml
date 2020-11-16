@@ -33,8 +33,8 @@ pipelines:
       - step:
           name: Upgrade patch version
           script:
-            - OLD_VERSION=$(cat composer.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
-            - NEW_VERSION=$(echo $VERSION | awk -F. '{ print $1"."$2"."$3+1 }')
+            - OLD_VERSION=$(cat composer.json | grep version | head -1 | awk -F":" '{print $2}' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            - NEW_VERSION=$(echo $OLD_VERSION | awk -F. '{ print $1"."$2"."$3+1 }')
             - sed -i 's|'"${OLD_VERSION}"'|'"${NEW_VERSION}"'|g' composer.json
             - git commit -m 'Upgrade to '"${NEW_VERSION}"' [skip ci]'
             - git tag v$NEW_VERSION
