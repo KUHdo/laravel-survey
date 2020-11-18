@@ -2,7 +2,6 @@
 
 namespace Kuhdo\Survey\Tests\Unit\Repositories\Answer;
 
-
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Kuhdo\Survey\Repositories\Answer\AnswerRepository;
@@ -97,7 +96,12 @@ class RepositoryTest extends TestCase
         $latestAnswerOfAll->created_at = Carbon::now()->addHour();
         $latestAnswerOfAll->save();
 
-        $this->assertTrue($latestAnswerOfAll->is($this->answerRepo->getLatestOfVoter($user)));
-        $this->assertTrue($latestAnswerOfQuestion->is($this->answerRepo->getLatestOfVoterAndQuestion($user, $question)));
+        $this->assertTrue(
+            $latestAnswerOfAll->is($this->answerRepo->getLatestOfVoter($user))
+        );
+
+        $this->assertTrue(
+            $latestAnswerOfQuestion->is($this->answerRepo->getLatestOfVoterAndQuestion($user, $question))
+        );
     }
 }

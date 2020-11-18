@@ -5,14 +5,42 @@
 
 image: composer:2.0
 
+definitions:
+  steps:
+    - step: &testing
+        name: Test
+        caches:
+          - composer
+        script:
+          - composer install
+          - ./vendor/bin/phpunit --configuration phpunit.xml --log-junit ./test-reports/composer-report.xml
+        artifacts:
+          - ./test-reports/*
+    - step: &code-quality
+        name: Code-Quality
+        caches:
+          - composer
+        script:
+          - composer install
+          - mkdir -p test-reports
+          - ./vendor/bin/phpcs -sw --standard=phpcs.xml --basepath=. --report=junit --report-file=./test-reports/phpcs-report.xml
+        artifacts:
+          - ./test-reports/*
 
 pipelines:
-  default:
-    - parallel:
-        - step:
-            name: Test
-            script:
-              - composer install
-              -  ./vendor/bin/phpunit
-            caches:
-              - composer
+  branches:
+    master:
+      - step:
+          name: Upgrade patch version
+          script:
+            - OLD_VERSION=$(cat composer.json | grep version | head -1 | awk -F":" '{print $2}' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            - NEW_VERSION=$(echo $OLD_VERSION | awk -F. '{ print $1"."$2"."$3+1 }')
+            - sed -i 's|'"${OLD_VERSION}"'|'"${NEW_VERSION}"'|g' composer.json
+            - git add composer.json
+            - git commit -m 'Upgrade to '"${NEW_VERSION}"' [skip ci]'
+            - git tag v$NEW_VERSION
+            - git push && git push --tags
+  pull-requests:
+    '**':
+      - step: *testing
+      - step: *code-quality

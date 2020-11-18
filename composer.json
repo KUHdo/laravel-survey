@@ -1,7 +1,7 @@
 {
   "name": "kuhdo/laravel-survey",
   "description": "Package for create surveys in laravel",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "license": "license",
   "authors": [
     {
@@ -19,7 +19,8 @@
     "phpunit/phpunit": "^8.0",
     "mockery/mockery": "^1.1",
     "orchestra/testbench": "^5.1",
-    "sempro/phpunit-pretty-print": "^1.0"
+    "sempro/phpunit-pretty-print": "^1.0",
+    "squizlabs/php_codesniffer": "3.*"
   },
   "scripts": {
     "test": "phpunit"

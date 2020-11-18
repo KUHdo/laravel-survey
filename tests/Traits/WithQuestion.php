@@ -17,7 +17,7 @@ trait WithQuestion
      * @param array $attributes
      * @return Question
      */
-    function makeQuestion($attributes = [])
+    protected function makeQuestion($attributes = [])
     {
         $default = [
             'question' => 'Test',
@@ -34,7 +34,7 @@ trait WithQuestion
      * @param array $attributes
      * @return Collection
      */
-    function makeQuestions($count = 1, $attributes = [])
+    protected function makeQuestions($count = 1, $attributes = [])
     {
         $questions = new Collection();
 
@@ -49,7 +49,7 @@ trait WithQuestion
      * @param array $attributes
      * @return Question
      */
-    function createQuestion($attributes = [])
+    protected function createQuestion($attributes = [])
     {
         $question = $this->makeQuestion($attributes);
 
@@ -66,7 +66,7 @@ trait WithQuestion
      * @param array $attributes
      * @return Question
      */
-    function firstOrCreateQuestion($id, $attributes = [])
+    protected function firstOrCreateQuestion($id, $attributes = [])
     {
         $question = isset($id) ?
             Question::firstOrCreate(['id' => $id], $attributes) :
@@ -80,7 +80,7 @@ trait WithQuestion
      * @param array $attributes
      * @return Collection
      */
-    function createQuestions($count = 1, $attributes = [])
+    protected function createQuestions($count = 1, $attributes = [])
     {
         $questions = $this->makeQuestions($count, $attributes);
 
@@ -89,7 +89,7 @@ trait WithQuestion
         $questions->each(function ($question) use ($survey) {
             /** @var Question $question */
             $question->survey()->associate($survey);
-           $question->save();
+            $question->save();
         });
 
         return $questions;

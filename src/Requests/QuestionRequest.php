@@ -3,7 +3,6 @@
 
 namespace Kuhdo\Survey\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class QuestionRequest extends FormRequest

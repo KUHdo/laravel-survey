@@ -3,7 +3,6 @@
 
 namespace Kuhdo\Survey\Tests\Unit\Repositories\Question;
 
-
 use Illuminate\Database\Eloquent\Collection;
 use Kuhdo\Survey\Repositories\Question\QuestionRepository;
 use Kuhdo\Survey\Tests\TestCase;
@@ -81,9 +80,12 @@ class RepositoryTest extends TestCase
         $question = $this->createQuestion();
 
         $this->createAnswersWithUser($user, 3, [ 'question_id' => $question->id ]);
-        $this->createAnswers( 3, [ 'question_id' => $question->id ]);
+        $this->createAnswers(3, [ 'question_id' => $question->id ]);
 
-        $this->assertEquals(3, $this->questionRepo->getByIdWithAnswersOfVoter($question->id, $user)->answers->count());
+        $this->assertEquals(
+            3,
+            $this->questionRepo->getByIdWithAnswersOfVoter($question->id, $user)->answers->count()
+        );
     }
 
     /**
@@ -100,7 +102,14 @@ class RepositoryTest extends TestCase
             $this->createAnswersWithUser($user, 2, [ 'question_id' => $question->id ]);
         });
 
-        $this->assertEquals(3, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->count());
-        $this->assertEquals(2, $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->first()->answers->count());
+        $this->assertEquals(
+            3,
+            $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->count()
+        );
+
+        $this->assertEquals(
+            2,
+            $this->questionRepo->getAllOfSurveyWithAnswersOfVoter($survey, $user)->first()->answers->count()
+        );
     }
 }
