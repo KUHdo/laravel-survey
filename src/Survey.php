@@ -1,12 +1,12 @@
 <?php
 
-namespace Kuhdo\Survey;
+namespace KUHdo\Survey;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Survey
- * @package Kuhdo\Survey
+ * @package KUHdo\Survey
  */
 class Survey extends Model
 {
@@ -30,6 +30,6 @@ class Survey extends Model
      */
     public function questions()
     {
-        return $this->hasMany('Kuhdo\Survey\Question');
+        return $this->hasMany('KUHdo\Survey\Question');
     }
 }

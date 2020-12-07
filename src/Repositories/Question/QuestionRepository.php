@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Kuhdo\Survey\Repositories\Question;
+namespace KUHdo\Survey\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
-use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
-use Kuhdo\Survey\Survey;
+use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
+use KUHdo\Survey\Survey;
 
 interface QuestionRepository
 {

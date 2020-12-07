@@ -1,11 +1,11 @@
 <?php
 
-namespace Kuhdo\Survey\Handlers\Question;
+namespace KUHdo\Survey\Handlers\Question;
 
-use Kuhdo\Survey\Handlers\Handler;
-use Kuhdo\Survey\Question;
-use Kuhdo\Survey\Requests\QuestionRequest;
-use Kuhdo\Survey\Survey;
+use KUHdo\Survey\Handlers\Handler;
+use KUHdo\Survey\Question;
+use KUHdo\Survey\Requests\QuestionRequest;
+use KUHdo\Survey\Survey;
 
 class StoreQuestion extends Handler
 {

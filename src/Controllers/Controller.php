@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuhdo\Survey\Controllers;
+namespace KUHdo\Survey\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

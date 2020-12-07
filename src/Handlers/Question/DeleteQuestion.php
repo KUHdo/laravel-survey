@@ -1,9 +1,9 @@
 <?php
 
-namespace Kuhdo\Survey\Handlers\Question;
+namespace KUHdo\Survey\Handlers\Question;
 
-use Kuhdo\Survey\Handlers\Handler;
-use Kuhdo\Survey\Question;
+use KUHdo\Survey\Handlers\Handler;
+use KUHdo\Survey\Question;
 
 class DeleteQuestion extends Handler
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuhdo\Survey\Facades;
+namespace KUHdo\Survey\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

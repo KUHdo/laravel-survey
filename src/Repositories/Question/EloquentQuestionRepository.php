@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Kuhdo\Survey\Repositories\Question;
+namespace KUHdo\Survey\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Kuhdo\Survey\Answer;
-use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
-use Kuhdo\Survey\Question;
-use Kuhdo\Survey\Survey;
+use KUHdo\Survey\Answer;
+use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
+use KUHdo\Survey\Question;
+use KUHdo\Survey\Survey;
 
 class EloquentQuestionRepository implements QuestionRepository
 {

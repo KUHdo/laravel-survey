@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuhdo\Survey\Tests;
+namespace KUHdo\Survey\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
@@ -12,7 +12,7 @@ abstract class TestCase extends OrchestraTestCase
      */
     protected function getPackageProviders($app)
     {
-        return ['Kuhdo\Survey\SurveyServiceProvider'];
+        return ['KUHdo\Survey\SurveyServiceProvider'];
     }
 
     /**

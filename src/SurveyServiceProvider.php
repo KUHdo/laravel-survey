@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuhdo\Survey;
+namespace KUHdo\Survey;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
@@ -34,7 +34,7 @@ class SurveyServiceProvider extends ServiceProvider
     protected function registerRoutes()
     {
         Route::group([
-            'namespace' => 'Kuhdo\Survey\Controllers',
+            'namespace' => 'KUHdo\Survey\Controllers',
             'prefix' => 'survey',
             'middleware' => 'web'
         ], function () {
@@ -57,13 +57,13 @@ class SurveyServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(
-            'Kuhdo\Survey\Repositories\Answer\AnswerRepository',
-            'Kuhdo\Survey\Repositories\Answer\EloquentAnswerRepository'
+            'KUHdo\Survey\Repositories\Answer\AnswerRepository',
+            'KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository'
         );
 
         $this->app->bind(
-            'Kuhdo\Survey\Repositories\Question\QuestionRepository',
-            'Kuhdo\Survey\Repositories\Question\EloquentQuestionRepository'
+            'KUHdo\Survey\Repositories\Question\QuestionRepository',
+            'KUHdo\Survey\Repositories\Question\EloquentQuestionRepository'
         );
     }
 

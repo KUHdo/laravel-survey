@@ -1,9 +1,9 @@
 <?php
 
-namespace Kuhdo\Survey\Handlers\Survey;
+namespace KUHdo\Survey\Handlers\Survey;
 
-use Kuhdo\Survey\Survey;
-use Kuhdo\Survey\Handlers\Handler;
+use KUHdo\Survey\Survey;
+use KUHdo\Survey\Handlers\Handler;
 
 class ShowSurvey extends Handler
 {

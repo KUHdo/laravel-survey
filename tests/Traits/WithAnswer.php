@@ -1,16 +1,16 @@
 <?php
 
-namespace Kuhdo\Survey\Tests\Traits;
+namespace KUHdo\Survey\Tests\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use Kuhdo\Survey\Answer;
-use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
-use Kuhdo\Survey\Question;
-use Kuhdo\Survey\Tests\User;
+use KUHdo\Survey\Answer;
+use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
+use KUHdo\Survey\Question;
+use KUHdo\Survey\Tests\User;
 
 /**
  * Trait WithAnswer
- * @package Kuhdo\Survey\Tests\Traits
+ * @package KUHdo\Survey\Tests\Traits
  */
 trait WithAnswer
 {

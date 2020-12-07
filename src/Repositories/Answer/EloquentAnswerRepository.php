@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Kuhdo\Survey\Repositories\Answer;
+namespace KUHdo\Survey\Repositories\Answer;
 
 use Illuminate\Database\Eloquent\Collection;
-use Kuhdo\Survey\Answer;
-use Kuhdo\Survey\Contracts\Voter\Voteable as Voter;
-use Kuhdo\Survey\Question;
+use KUHdo\Survey\Answer;
+use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
+use KUHdo\Survey\Question;
 
 class EloquentAnswerRepository implements AnswerRepository
 {

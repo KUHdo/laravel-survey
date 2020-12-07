@@ -1,14 +1,14 @@
 <?php
 
-namespace Kuhdo\Survey\Controllers;
+namespace KUHdo\Survey\Controllers;
 
-use Kuhdo\Survey\Handlers\Survey\DeleteSurvey;
-use Kuhdo\Survey\Handlers\Survey\IndexSurvey;
-use Kuhdo\Survey\Handlers\Survey\ShowSurvey;
-use Kuhdo\Survey\Handlers\Survey\StoreSurvey;
-use Kuhdo\Survey\Handlers\Survey\UpdateSurvey;
-use Kuhdo\Survey\Requests\SurveyRequest;
-use Kuhdo\Survey\Survey;
+use KUHdo\Survey\Handlers\Survey\DeleteSurvey;
+use KUHdo\Survey\Handlers\Survey\IndexSurvey;
+use KUHdo\Survey\Handlers\Survey\ShowSurvey;
+use KUHdo\Survey\Handlers\Survey\StoreSurvey;
+use KUHdo\Survey\Handlers\Survey\UpdateSurvey;
+use KUHdo\Survey\Requests\SurveyRequest;
+use KUHdo\Survey\Survey;
 
 class SurveyController extends Controller
 {

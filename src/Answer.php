@@ -1,12 +1,12 @@
 <?php
 
-namespace Kuhdo\Survey;
+namespace KUHdo\Survey;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Answer
- * @package Kuhdo\Survey
+ * @package KUHdo\Survey
  */
 class Answer extends Model
 {
@@ -33,7 +33,7 @@ class Answer extends Model
      */
     public function question()
     {
-        return $this->belongsTo('Kuhdo\Survey\Question', 'question_id');
+        return $this->belongsTo('KUHdo\Survey\Question', 'question_id');
     }
 
     /**

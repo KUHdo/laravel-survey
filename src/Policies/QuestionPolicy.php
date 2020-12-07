@@ -1,9 +1,9 @@
 <?php
 
-namespace Kuhdo\Survey\Policies;
+namespace KUHdo\Survey\Policies;
 
 use App\User;
-use Kuhdo\Survey\Question;
+use KUHdo\Survey\Question;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class QuestionPolicy

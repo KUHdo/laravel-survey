@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuhdo\Survey\Handlers;
+namespace KUHdo\Survey\Handlers;
 
 use BadMethodCallException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

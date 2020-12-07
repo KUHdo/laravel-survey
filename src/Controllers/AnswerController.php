@@ -1,19 +1,19 @@
 <?php
 
-namespace Kuhdo\Survey\Controllers;
+namespace KUHdo\Survey\Controllers;
 
-use Kuhdo\Survey\Handlers\Answer\DeleteAnswer;
-use Kuhdo\Survey\Handlers\Answer\DeleteQuestion;
-use Kuhdo\Survey\Handlers\Answer\IndexAnswer;
-use Kuhdo\Survey\Handlers\Answer\IndexQuestion;
-use Kuhdo\Survey\Answer;
-use Kuhdo\Survey\Handlers\Answer\ShowAnswer;
-use Kuhdo\Survey\Handlers\Answer\ShowQuestion;
-use Kuhdo\Survey\Handlers\Answer\StoreAnswer;
-use Kuhdo\Survey\Handlers\Answer\StoreQuestion;
-use Kuhdo\Survey\Handlers\Answer\UpdateAnswer;
-use Kuhdo\Survey\Handlers\Answer\UpdateQuestion;
-use Kuhdo\Survey\Requests\AnswerRequest;
+use KUHdo\Survey\Handlers\Answer\DeleteAnswer;
+use KUHdo\Survey\Handlers\Answer\DeleteQuestion;
+use KUHdo\Survey\Handlers\Answer\IndexAnswer;
+use KUHdo\Survey\Handlers\Answer\IndexQuestion;
+use KUHdo\Survey\Answer;
+use KUHdo\Survey\Handlers\Answer\ShowAnswer;
+use KUHdo\Survey\Handlers\Answer\ShowQuestion;
+use KUHdo\Survey\Handlers\Answer\StoreAnswer;
+use KUHdo\Survey\Handlers\Answer\StoreQuestion;
+use KUHdo\Survey\Handlers\Answer\UpdateAnswer;
+use KUHdo\Survey\Handlers\Answer\UpdateQuestion;
+use KUHdo\Survey\Requests\AnswerRequest;
 
 class AnswerController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kuhdo\Survey\Tests;
+namespace KUHdo\Survey\Tests;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Kuhdo\Survey\Tests\Traits\WithAnswer;
+use KUHdo\Survey\Tests\Traits\WithAnswer;
 
 class VoterTest extends TestCase
 {

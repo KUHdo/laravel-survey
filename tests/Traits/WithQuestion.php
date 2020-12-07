@@ -1,13 +1,13 @@
 <?php
 
-namespace Kuhdo\Survey\Tests\Traits;
+namespace KUHdo\Survey\Tests\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use Kuhdo\Survey\Question;
+use KUHdo\Survey\Question;
 
 /**
  * Trait WithQuestion
- * @package Kuhdo\Survey\Tests\Traits
+ * @package KUHdo\Survey\Tests\Traits
  */
 trait WithQuestion
 {

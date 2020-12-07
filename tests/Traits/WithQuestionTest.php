@@ -1,13 +1,13 @@
 <?php
 
-namespace Kuhdo\Survey\Tests\Traits;
+namespace KUHdo\Survey\Tests\Traits;
 
 use Illuminate\Support\Facades\DB;
-use Kuhdo\Survey\Tests\TestCase;
+use KUHdo\Survey\Tests\TestCase;
 
 /**
  * Class WithQuestionTest
- * @package Kuhdo\Survey\Tests\Traits
+ * @package KUHdo\Survey\Tests\Traits
  */
 class WithQuestionTest extends TestCase
 {

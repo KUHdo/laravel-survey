@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use Kuhdo\Survey\Survey;
+use KUHdo\Survey\Survey;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SurveyPolicy

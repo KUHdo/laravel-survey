@@ -27,21 +27,21 @@
   },
   "autoload": {
     "psr-4": {
-      "Kuhdo\\Survey\\": "src/"
+      "KUHdo\\Survey\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Kuhdo\\Survey\\Tests\\": "tests"
+      "KUHdo\\Survey\\Tests\\": "tests"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Kuhdo\\Survey\\SurveyServiceProvider"
+        "KUHdo\\Survey\\SurveyServiceProvider"
       ],
       "aliases": {
-        "Survey": "Kuhdo\\Survey\\Facades\\Survey"
+        "Survey": "KUHdo\\Survey\\Facades\\Survey"
       }
     }
   }

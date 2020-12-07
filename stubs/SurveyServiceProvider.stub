@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use Kuhdo\Survey\SurveyApplicationServiceProvider;
+use KUHdo\Survey\SurveyApplicationServiceProvider;
 
 class SurveyServiceProvider extends SurveyApplicationServiceProvider
 {
     protected $policies = [
-        'Kuhdo\Survey\Survey' => 'App\Policies\SurveyPolicy',
-        'Kuhdo\Survey\Question' => 'App\Policies\QuestionPolicy',
-        'Kuhdo\Survey\Answer' => 'App\Policies\AnswerPolicy',
+        'KUHdo\Survey\Survey' => 'App\Policies\SurveyPolicy',
+        'KUHdo\Survey\Question' => 'App\Policies\QuestionPolicy',
+        'KUHdo\Survey\Answer' => 'App\Policies\AnswerPolicy',
     ];
 
     /**

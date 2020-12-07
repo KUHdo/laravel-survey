@@ -1,8 +1,8 @@
 <?php
 
-namespace Kuhdo\Survey\Policies;
+namespace KUHdo\Survey\Policies;
 
-use Kuhdo\Survey\Survey;
+use KUHdo\Survey\Survey;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SurveyPolicy

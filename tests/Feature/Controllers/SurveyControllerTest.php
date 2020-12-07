@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Kuhdo\Survey\Tests\Feature\Controllers;
+namespace KUHdo\Survey\Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Kuhdo\Survey\Survey;
-use Kuhdo\Survey\Tests\TestCase;
-use Kuhdo\Survey\Tests\Traits\WithSurvey;
-use Kuhdo\Survey\Tests\User;
+use KUHdo\Survey\Survey;
+use KUHdo\Survey\Tests\TestCase;
+use KUHdo\Survey\Tests\Traits\WithSurvey;
+use KUHdo\Survey\Tests\User;
 
 class SurveyControllerTest extends TestCase
 {

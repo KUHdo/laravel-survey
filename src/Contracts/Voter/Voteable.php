@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kuhdo\Survey\Contracts\Voter;
+namespace KUHdo\Survey\Contracts\Voter;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 

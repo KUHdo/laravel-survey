@@ -1,15 +1,15 @@
 <?php
 
-namespace Kuhdo\Survey;
+namespace KUHdo\Survey;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class SurveyApplicationServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        'Kuhdo\Survey\Survey' => 'Kuhdo\Survey\Policies\SurveyPolicy',
-        'Kuhdo\Survey\Question' => 'Kuhdo\Survey\Policies\QuestionPolicy',
-        'Kuhdo\Survey\Answer' => 'Kuhdo\Survey\Policies\AnswerPolicy',
+        'KUHdo\Survey\Survey' => 'KUHdo\Survey\Policies\SurveyPolicy',
+        'KUHdo\Survey\Question' => 'KUHdo\Survey\Policies\QuestionPolicy',
+        'KUHdo\Survey\Answer' => 'KUHdo\Survey\Policies\AnswerPolicy',
     ];
 
     /**

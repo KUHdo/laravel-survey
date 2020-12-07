@@ -1,13 +1,13 @@
 <?php
 
-namespace Kuhdo\Survey\Tests\Unit\Repositories\Answer;
+namespace KUHdo\Survey\Tests\Unit\Repositories\Answer;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Kuhdo\Survey\Repositories\Answer\AnswerRepository;
-use Kuhdo\Survey\Tests\TestCase;
-use Kuhdo\Survey\Tests\Traits\WithAnswer;
-use Kuhdo\Survey\Tests\User;
+use KUHdo\Survey\Repositories\Answer\AnswerRepository;
+use KUHdo\Survey\Tests\TestCase;
+use KUHdo\Survey\Tests\Traits\WithAnswer;
+use KUHdo\Survey\Tests\User;
 
 class RepositoryTest extends TestCase
 {
@@ -51,7 +51,7 @@ class RepositoryTest extends TestCase
      */
     public function testAnswerRepoShouldBeInstanceOfEloquentRepository()
     {
-        $this->assertInstanceOf('Kuhdo\Survey\Repositories\Answer\EloquentAnswerRepository', $this->answerRepo);
+        $this->assertInstanceOf('KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository', $this->answerRepo);
     }
 
     /**

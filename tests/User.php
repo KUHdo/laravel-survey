@@ -1,10 +1,10 @@
 <?php
 
-namespace Kuhdo\Survey\Tests;
+namespace KUHdo\Survey\Tests;
 
 use Illuminate\Database\Eloquent\Model;
-use Kuhdo\Survey\Contracts\Voter\Voteable as VoteableContract;
-use Kuhdo\Survey\Traits\Voteable;
+use KUHdo\Survey\Contracts\Voter\Voteable as VoteableContract;
+use KUHdo\Survey\Traits\Voteable;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

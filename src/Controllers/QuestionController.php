@@ -1,14 +1,14 @@
 <?php
 
-namespace Kuhdo\Survey\Controllers;
+namespace KUHdo\Survey\Controllers;
 
-use Kuhdo\Survey\Handlers\Question\UpdateQuestion;
-use Kuhdo\Survey\Handlers\Question\DeleteQuestion;
-use Kuhdo\Survey\Handlers\Question\IndexQuestion;
-use Kuhdo\Survey\Handlers\Question\ShowQuestion;
-use Kuhdo\Survey\Handlers\Question\StoreQuestion;
-use Kuhdo\Survey\Question;
-use Kuhdo\Survey\Requests\QuestionRequest;
+use KUHdo\Survey\Handlers\Question\UpdateQuestion;
+use KUHdo\Survey\Handlers\Question\DeleteQuestion;
+use KUHdo\Survey\Handlers\Question\IndexQuestion;
+use KUHdo\Survey\Handlers\Question\ShowQuestion;
+use KUHdo\Survey\Handlers\Question\StoreQuestion;
+use KUHdo\Survey\Question;
+use KUHdo\Survey\Requests\QuestionRequest;
 
 class QuestionController extends Controller
 {
