@@ -64,6 +64,20 @@ class SurveyServiceProvider extends ServiceProvider
             'KUHdo\Survey\Repositories\Question\QuestionRepository',
             'KUHdo\Survey\Repositories\Question\EloquentQuestionRepository'
         );
+
+        // App model binding via config
+        $this->app->bind(
+            Contracts\Survey::class,
+            config('models.survey')
+        );
+        $this->app->bind(
+            Contracts\Question::class,
+            config('models.question')
+        );
+        $this->app->bind(
+            Contracts\Answer::class,
+            config('models.answer')
+        );
     }
 
     /**

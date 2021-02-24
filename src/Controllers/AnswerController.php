@@ -49,12 +49,13 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Answer $answer
+     * @param int $answer
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function show(Answer $answer): JsonResponse
+    public function show(int $answer): JsonResponse
     {
+        $answer = Answer::findOrFail($answer);
         $this->authorize('view', $answer);
         $handler = new ShowAnswer();
         $answer = $handler($answer);

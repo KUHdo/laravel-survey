@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use KUHdo\Survey\Database\factories\AnswerFactory;
+use \KUHdo\Survey\Contracts\Answer as AnswerContract;
 
 /**
  * Class Answer
  * @package KUHdo\Survey
  */
-class Answer extends Model
+class Answer extends Model implements AnswerContract
 {
     use HasFactory;
 

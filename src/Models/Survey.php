@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use KUHdo\Survey\Database\factories\SurveyFactory;
+use \KUHdo\Survey\Contracts\Survey as SurveyContract;
 
 /**
  * Class Survey
  * @package KUHdo\Survey
  */
-class Survey extends Model
+class Survey extends Model implements SurveyContract
 {
     use HasFactory;
 
