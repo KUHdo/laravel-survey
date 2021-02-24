@@ -1,6 +1,6 @@
 <?php
 
-namespace KUHdo\Survey\Models\Controllers;
+namespace KUHdo\Survey\Controllers;
 
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;

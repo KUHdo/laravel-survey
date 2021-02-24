@@ -13,13 +13,17 @@ class SurveyControllerTest extends TestCase
     use WithoutMiddleware;
 
     /**
+     * Basic feature test for controller action.
+     *
+     * @small
      * @covers \KUHdo\Survey\Models\Controllers\SurveyController::index
      */
     public function testIndex()
     {
         $user = User::create();
         $surveys = Survey::factory()->count(2)->create();
-        $response = $this->actingAs($user)->get('/survey/surveys/');
+        $response = $this->actingAs($user)
+            ->get('/survey/surveys/');
         $response->assertStatus(200);
         $this->assertCount($surveys->count(), $response->json());
     }
@@ -170,7 +174,6 @@ class SurveyControllerTest extends TestCase
         $survey = Survey::factory()->create();
         $response = $this->actingAs($user)
             ->delete('/survey/surveys/' . $survey->id);
-
         $response->assertStatus(200);
         $this->assertFalse($survey->exists());
     }

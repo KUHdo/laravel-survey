@@ -2,15 +2,16 @@
 
 namespace KUHdo\Survey\Tests;
 
+use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
 {
     /**
-     * @param  \Illuminate\Foundation\Application $app
+     * @param  Application $app
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return ['KUHdo\Survey\SurveyServiceProvider'];
     }
@@ -18,7 +19,7 @@ abstract class TestCase extends OrchestraTestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param  Application $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -40,7 +41,6 @@ abstract class TestCase extends OrchestraTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         // and other test setup steps you need to perform

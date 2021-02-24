@@ -2,10 +2,11 @@
 
 namespace KUHdo\Survey\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use KUHdo\Survey\Traits\HasPackageFactory;
+use KUHdo\Survey\Database\factories\QuestionFactory;
 
 /**
  * Class Question
@@ -13,7 +14,15 @@ use KUHdo\Survey\Traits\HasPackageFactory;
  */
 class Question extends Model
 {
-    use HasPackageFactory;
+    use HasFactory;
+
+    /**
+     * @return QuestionFactory
+     */
+    protected static function newFactory(): QuestionFactory
+    {
+        return new QuestionFactory();
+    }
 
     /**
      * The table associated with the model.
@@ -48,7 +57,7 @@ class Question extends Model
      */
     public function survey(): BelongsTo
     {
-        return $this->belongsTo('KUHdo\Survey\Survey', 'survey_id');
+        return $this->belongsTo(Survey::class, 'survey_id');
     }
 
     /**
@@ -58,6 +67,6 @@ class Question extends Model
      */
     public function answers(): HasMany
     {
-        return $this->hasMany('KUHdo\Survey\Answer');
+        return $this->hasMany(Answer::class);
     }
 }

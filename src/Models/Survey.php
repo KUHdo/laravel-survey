@@ -2,9 +2,10 @@
 
 namespace KUHdo\Survey\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use KUHdo\Survey\Traits\HasPackageFactory;
+use KUHdo\Survey\Database\factories\SurveyFactory;
 
 /**
  * Class Survey
@@ -12,7 +13,15 @@ use KUHdo\Survey\Traits\HasPackageFactory;
  */
 class Survey extends Model
 {
-    use HasPackageFactory;
+    use HasFactory;
+
+    /**
+     * @return SurveyFactory
+     */
+    protected static function newFactory(): SurveyFactory
+    {
+        return new SurveyFactory();
+    }
 
     /**
      * The table associated with the model.
@@ -45,6 +54,6 @@ class Survey extends Model
      */
     public function questions(): HasMany
     {
-        return $this->hasMany('KUHdo\Survey\Question');
+        return $this->hasMany(Question::class);
     }
 }

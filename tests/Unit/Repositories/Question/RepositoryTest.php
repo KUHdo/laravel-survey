@@ -6,53 +6,60 @@ namespace KUHdo\Survey\Tests\Unit\Repositories\Question;
 use Illuminate\Database\Eloquent\Collection;
 use KUHdo\Survey\Repositories\Question\QuestionRepository;
 use KUHdo\Survey\Tests\TestCase;
-use KUHdo\Survey\Tests\Traits\WithAnswer;
 use KUHdo\Survey\Tests\User;
 
 class RepositoryTest extends TestCase
 {
-    use WithAnswer;
+    /**
+     * @var QuestionRepository|null
+     */
+    private ?QuestionRepository $questionRepo;
 
     /**
-     * @var QuestionRepository
+     * Setup the test environment.
+     *
+     * @return void
      */
-    private $questionRepo;
-
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
-
         $this->questionRepo = resolve(QuestionRepository::class);
     }
 
     /**
-     * Should return Collection of Question
+     * Should return Collection of Question.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionCollection()
     {
         $this->createQuestions(3);
-
         $this->assertInstanceOf(Collection::class, $this->questionRepo->getAll());
         $this->assertEquals(3, $this->questionRepo->getAll()->count());
     }
 
     /**
-     * Should return Question with certain id
+     * Should return Question with certain id.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionById()
     {
         $question = $this->createQuestion();
-
         $this->assertTrue($question->is($this->questionRepo->getById($question->id)));
     }
 
     /**
-     * Should return Question Collection of given survey
+     * Should return Question Collection of given survey.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionsOfSurvey()
     {
         $survey = $this->createSurvey();
-
         $this->createQuestions(3, [ 'survey_id' => $survey->id ]);
         $this->createQuestion();
 
@@ -61,7 +68,10 @@ class RepositoryTest extends TestCase
     }
 
     /**
-     * Should return certain question with related answers
+     * Should return certain question with related answers.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionWithAnswers()
     {
@@ -72,13 +82,15 @@ class RepositoryTest extends TestCase
     }
 
     /**
-     * Should return certain question with related answers of given voter
+     * Should return certain question with related answers of given voter.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionWithAnswersAndVoter()
     {
         $user = User::create();
         $question = $this->createQuestion();
-
         $this->createAnswersWithUser($user, 3, [ 'question_id' => $question->id ]);
         $this->createAnswers(3, [ 'question_id' => $question->id ]);
 
@@ -89,15 +101,16 @@ class RepositoryTest extends TestCase
     }
 
     /**
-     * Should return Question Collection of given survey with answers and given voter
+     * Should return Question Collection of given survey with answers and given voter.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionsOfSurveyWithAnswersOfVoter()
     {
         $user = User::create();
         $survey = $this->createSurvey();
-
         $questions = $this->createQuestions(3, [ 'survey_id' => $survey->id ]);
-
         $questions->each(function ($question) use ($user) {
             $this->createAnswersWithUser($user, 2, [ 'question_id' => $question->id ]);
         });

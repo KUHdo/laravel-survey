@@ -3,9 +3,17 @@
 namespace KUHdo\Survey\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use KUHdo\Survey\Models\Survey;
 
-class QuestionFactory extends Factory
+class SurveyFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Survey::class;
+
     /**
      * Define the model's default state.
      *
@@ -14,8 +22,7 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'question' => 'Test',
-            'category' => 'Test'
+            'title' => 'Test'
         ];
     }
 }

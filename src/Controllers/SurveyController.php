@@ -1,6 +1,6 @@
 <?php
 
-namespace KUHdo\Survey\Models\Controllers;
+namespace KUHdo\Survey\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;

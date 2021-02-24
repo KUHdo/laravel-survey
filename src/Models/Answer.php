@@ -2,9 +2,10 @@
 
 namespace KUHdo\Survey\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use KUHdo\Survey\Traits\HasPackageFactory;
+use KUHdo\Survey\Database\factories\AnswerFactory;
 
 /**
  * Class Answer
@@ -12,7 +13,15 @@ use KUHdo\Survey\Traits\HasPackageFactory;
  */
 class Answer extends Model
 {
-    use HasPackageFactory;
+    use HasFactory;
+
+    /**
+     * @return AnswerFactory
+     */
+    protected static function newFactory(): AnswerFactory
+    {
+        return new AnswerFactory();
+    }
 
     /**
      * The table associated with the model.
@@ -43,20 +52,32 @@ class Answer extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the question that owns the answer
+     * Get the question that owns the answer.
      */
     public function question()
     {
-        return $this->belongsTo('KUHdo\Survey\Question', 'question_id');
+        return $this->belongsTo(Question::class, 'question_id');
+    }
+
+    /**
+     * Get the owning answerable model.
+     *
+     * @deprecated Use votable as relation instead
+     * @return MorphTo
+     */
+    public function model(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     /**
      * Get the owning answerable model.
      *
      * @return MorphTo
+     * @since 1.0.0
      */
-    public function model(): MorphTo
+    public function votable() : MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo('model');
     }
 }

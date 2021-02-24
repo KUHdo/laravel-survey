@@ -3,6 +3,7 @@
 namespace KUHdo\Survey\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use KUHdo\Survey\Models\Answer;
 
 trait Voteable
 {
@@ -13,6 +14,6 @@ trait Voteable
      */
     public function answers(): MorphMany
     {
-        return $this->morphMany('KUHdo\Survey\Answer', 'model');
+        return $this->morphMany(Answer::class, 'model');
     }
 }
