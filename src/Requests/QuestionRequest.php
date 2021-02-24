@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KUHdo\Survey\Requests;
+namespace KUHdo\Survey\Models\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -17,7 +17,12 @@ class QuestionRequest extends FormRequest
         return $this->registerRules();
     }
 
-    protected function registerRules()
+    /**
+     * Validation rules of a question.
+     *
+     * @return string[]
+     */
+    protected function registerRules(): array
     {
         return [
             'question' => 'required|string',
@@ -27,7 +32,8 @@ class QuestionRequest extends FormRequest
     }
 
     /**
-     * custom error messages for request validation
+     * custom error messages for request validation.
+     *
      * @return array
      */
     public function messages()

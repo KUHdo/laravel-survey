@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class Handler extends BaseController
 {
@@ -17,7 +18,8 @@ abstract class Handler extends BaseController
      *
      * @param  string  $method
      * @param  array   $parameters
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     * @noinspection PhpMissingReturnTypeInspection because of parent Controller
      */
     public function callAction($method, $parameters)
     {

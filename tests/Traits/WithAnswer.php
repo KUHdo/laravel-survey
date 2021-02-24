@@ -3,9 +3,9 @@
 namespace KUHdo\Survey\Tests\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use KUHdo\Survey\Answer;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
-use KUHdo\Survey\Question;
+use KUHdo\Survey\Models\Question;
 use KUHdo\Survey\Tests\User;
 
 /**

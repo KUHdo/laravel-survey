@@ -3,7 +3,7 @@
 namespace KUHdo\Survey\Tests\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use KUHdo\Survey\Survey;
+use KUHdo\Survey\Models\Survey;
 
 /**
  * Trait WithSurvey

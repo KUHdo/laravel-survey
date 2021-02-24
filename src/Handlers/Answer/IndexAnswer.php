@@ -2,12 +2,18 @@
 
 namespace KUHdo\Survey\Handlers\Answer;
 
-use KUHdo\Survey\Answer;
+use Illuminate\Database\Eloquent\Collection;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Handlers\Handler;
 
 class IndexAnswer extends Handler
 {
-    public function __invoke()
+    /**
+     * Small index answer handler for use in controller actions
+     *
+     * @return Collection|array
+     */
+    public function __invoke(): Collection|array
     {
         return Answer::all();
     }

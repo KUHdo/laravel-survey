@@ -1,8 +1,10 @@
 <?php
 
-namespace KUHdo\Survey;
+namespace KUHdo\Survey\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use KUHdo\Survey\Traits\HasPackageFactory;
 
 /**
  * Class Answer
@@ -10,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Answer extends Model
 {
+    use HasPackageFactory;
+
     /**
      * The table associated with the model.
      *
@@ -17,6 +21,11 @@ class Answer extends Model
      */
     protected $table = 'answers';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'type',
         'value',
@@ -26,6 +35,11 @@ class Answer extends Model
         'model_id'
     ];
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = ['id'];
 
     /**
@@ -37,10 +51,11 @@ class Answer extends Model
     }
 
     /**
-     * Get the owning answerable model
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * Get the owning answerable model.
+     *
+     * @return MorphTo
      */
-    public function model()
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }

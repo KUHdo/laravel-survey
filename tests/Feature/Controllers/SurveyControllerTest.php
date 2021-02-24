@@ -4,7 +4,7 @@
 namespace KUHdo\Survey\Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use KUHdo\Survey\Survey;
+use KUHdo\Survey\Models\Survey;
 use KUHdo\Survey\Tests\TestCase;
 use KUHdo\Survey\Tests\Traits\WithSurvey;
 use KUHdo\Survey\Tests\User;

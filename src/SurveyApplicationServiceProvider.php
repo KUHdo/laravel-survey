@@ -6,10 +6,15 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class SurveyApplicationServiceProvider extends ServiceProvider
 {
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
     protected $policies = [
-        'KUHdo\Survey\Survey' => 'KUHdo\Survey\Policies\SurveyPolicy',
-        'KUHdo\Survey\Question' => 'KUHdo\Survey\Policies\QuestionPolicy',
-        'KUHdo\Survey\Answer' => 'KUHdo\Survey\Policies\AnswerPolicy',
+        'KUHdo\Survey\Models\Survey' => 'KUHdo\Survey\Policies\SurveyPolicy',
+        'KUHdo\Survey\Models\Question' => 'KUHdo\Survey\Policies\QuestionPolicy',
+        'KUHdo\Survey\Models\Answer' => 'KUHdo\Survey\Policies\AnswerPolicy',
     ];
 
     /**

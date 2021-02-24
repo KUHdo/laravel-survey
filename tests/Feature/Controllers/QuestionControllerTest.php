@@ -4,7 +4,7 @@
 namespace KUHdo\Survey\Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use KUHdo\Survey\Question;
+use KUHdo\Survey\Models\Question;
 use KUHdo\Survey\Tests\TestCase;
 use KUHdo\Survey\Tests\Traits\WithQuestion;
 use KUHdo\Survey\Tests\User;
@@ -17,14 +17,10 @@ class QuestionControllerTest extends TestCase
     public function testIndex()
     {
         $user = User::create();
-
         $questions = $this->createQuestions(2);
-
         $response = $this->actingAs($user)->get('/survey/questions');
-
         $response->assertStatus(200);
-
-        $this->assertEquals($questions->count(), count($response->json()));
+        $this->assertCount($questions->count(), $response->json());
     }
 
     public function testIndexAsGuest()
@@ -37,7 +33,6 @@ class QuestionControllerTest extends TestCase
     public function testShow()
     {
         $user = User::create();
-
         $question = $this->createQuestion();
 
         $response = $this->actingAs($user)->get('/survey/questions/' . $question->id);

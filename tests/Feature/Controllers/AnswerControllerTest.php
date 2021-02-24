@@ -13,23 +13,25 @@ class AnswerControllerTest extends TestCase
     use WithAnswer;
     use WithoutMiddleware;
 
+    /**
+     *
+     */
     public function testIndex()
     {
         $user = User::create();
-
         $answers = $this->createAnswers(2);
-
-        $response = $this->actingAs($user)->get('/survey/answers');
-
+        $response = $this->actingAs($user)
+            ->get('/survey/answers');
         $response->assertStatus(200);
-
         $this->assertEquals($answers->count(), count($response->json()));
     }
 
+    /**
+     *
+     */
     public function testIndexAsGuest()
     {
         $response = $this->get('/survey/answers');
-
         $response->assertStatus(403);
     }
 

@@ -5,10 +5,10 @@ namespace KUHdo\Survey\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use KUHdo\Survey\Answer;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
-use KUHdo\Survey\Question;
-use KUHdo\Survey\Survey;
+use KUHdo\Survey\Models\Question;
+use KUHdo\Survey\Models\Survey;
 
 class EloquentQuestionRepository implements QuestionRepository
 {
@@ -21,34 +21,38 @@ class EloquentQuestionRepository implements QuestionRepository
     }
 
     /**
-     * @param $id
-     * @return mixed
+     * @param int $id
+     * @return Question|null
      */
-    public function getById($id)
+    public function getById(int $id): ?Question
     {
         return Question::find($id);
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getByIdWithAnswers($id)
-    {
-        return Question::with('answers')->where('id', '=', $id)->first();
-    }
 
     /**
-     * @param $id
-     * @param Voter $voter
-     * @return mixed
+     * @param int $id
+     * @return Question|null
      */
-    public function getByIdWithAnswersOfVoter($id, Voter $voter)
+    public function getByIdWithAnswers(int $id): ?Question
     {
-        return Question::with(['answers' => function ($query) use ($voter) {
-            /** @var HasMany $query */
-            $query->where('model_id', '=', $voter->id)->latest();
-        }])->where('id', '=', $id)->first();
+        return Question::with('answers')
+            ->where('id', '=', $id)
+            ->first();
+    }
+
+
+    /**
+     * @param int $id
+     * @param Voter $voter
+     * @return Question|null
+     */
+    public function getByIdWithAnswersOfVoter(int $id, Voter $voter): ?Question
+    {
+        return Question::with([
+            'answers' => fn (HasMany $query) =>  $query->where('model_id', '=', $voter->id)->latest()
+        ])->where('id', '=', $id)
+          ->first();
     }
 
     /**
@@ -67,9 +71,9 @@ class EloquentQuestionRepository implements QuestionRepository
      */
     public function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection
     {
-        return Question::with(['answers' => function ($query) use ($voter) {
-            /** @var HasMany $query */
-            $query->where('model_id', '=', $voter->id)->latest();
-        }])->where('survey_id', '=', $survey->id)->get();
+        return Question::with([
+            'answers' => fn (HasMany $query) => $query->where('model_id', '=', $voter->id)->latest()
+        ])->where('survey_id', '=', $survey->id)
+          ->get();
     }
 }

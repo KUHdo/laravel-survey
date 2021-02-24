@@ -4,14 +4,15 @@
 namespace KUHdo\Survey\Repositories\Answer;
 
 use Illuminate\Database\Eloquent\Collection;
-use KUHdo\Survey\Answer;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
-use KUHdo\Survey\Question;
+use KUHdo\Survey\Models\Question;
 
 class EloquentAnswerRepository implements AnswerRepository
 {
     /**
-     * @return mixed|void
+     * @return Collection
      */
     public function getAll() : Collection
     {
@@ -19,68 +20,75 @@ class EloquentAnswerRepository implements AnswerRepository
     }
 
     /**
-     * @param $id
-     * @return mixed|void
+     * @param int $id
+     * @return Answer
      */
-    public function getById($id)
+    public function getById(int $id): Answer
     {
         return Answer::find($id);
     }
 
     /**
      * @param Voter $voter
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
-    private function getAllBuilder(Voter $voter)
+    private function getAllBuilder(Voter $voter): MorphMany
     {
         return $voter->answers();
     }
 
     /**
      * @param Voter $voter
-     * @return mixed
+     * @return Collection
      */
-    public function getAllOfVoter(Voter $voter)
+    public function getAllOfVoter(Voter $voter): Collection
     {
-        return $this->getAllBuilder($voter)->getResults();
+        return $this->getAllBuilder($voter)
+            ->getResults();
     }
 
     /**
      * @param Voter $voter
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\MorphMany|mixed|object|null
+     * @return Answer
      */
-    public function getLatestOfVoter(Voter $voter)
+    public function getLatestOfVoter(Voter $voter): Answer
     {
-        return $this->getAllBuilder($voter)->latest()->first();
-    }
-
-    /**
-     * @param Voter $voter
-     * @param Question $question
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    private function getAllOfQuestionBuilder(Voter $voter, Question $question)
-    {
-        return $this->getAllBuilder($voter)->where('question_id', '=', $question->id);
+        return $this->getAllBuilder($voter)
+            ->latest()
+            ->first();
     }
 
     /**
      * @param Voter $voter
      * @param Question $question
-     * @return mixed
+     * @return MorphMany
      */
-    public function getAllOfVoterAndQuestion(Voter $voter, Question $question)
+    private function getAllOfQuestionBuilder(Voter $voter, Question $question): MorphMany
     {
-        return $this->getAllOfQuestionBuilder($voter, $question)->getResults();
+        return $this->getAllBuilder($voter)
+            ->where('question_id', '=', $question->id);
     }
 
     /**
      * @param Voter $voter
      * @param Question $question
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\MorphMany|mixed|object|null
+     * @return Collection
      */
-    public function getLatestOfVoterAndQuestion(Voter $voter, Question $question)
+    public function getAllOfVoterAndQuestion(Voter $voter, Question $question): Collection
     {
-        return $this->getAllOfQuestionBuilder($voter, $question)->latest()->first();
+        return $this->getAllOfQuestionBuilder($voter, $question)
+            ->getResults();
+    }
+
+    /**
+     * @param Voter $voter
+     * @param Question $question
+     * @return Answer
+     */
+    public function getLatestOfVoterAndQuestion(Voter $voter, Question $question): Answer
+    {
+        return $this->getAllOfQuestionBuilder($voter, $question)
+            ->latest()
+            ->first();
     }
 }

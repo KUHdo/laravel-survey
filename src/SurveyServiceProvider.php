@@ -52,9 +52,7 @@ class SurveyServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/survey.php', 'survey');
 
         // Register the service the package provides.
-        $this->app->singleton('survey', function ($app) {
-            return new Survey;
-        });
+        $this->app->singleton('survey', fn($app) => new Survey);
 
         $this->app->bind(
             'KUHdo\Survey\Repositories\Answer\AnswerRepository',

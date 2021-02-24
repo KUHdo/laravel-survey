@@ -18,12 +18,16 @@ definitions:
           - ./test-reports/*
     - step: &code-quality
         name: Code-Quality
-        caches:
-          - composer
+        image: php:8.0
         script:
-          - composer install
-          - mkdir -p test-reports
-          - ./vendor/bin/phpcs -sw --standard=phpcs.xml --basepath=. --report=junit --report-file=./test-reports/phpcs-report.xml
+          - mkdir -p ./test-reports/ ./tmp/phpcs/
+          - curl -L https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar -o ./tmp/phpcs.phar
+          - chmod u+x ./tmp/phpcs.phar
+          - ./tmp/phpcs.phar -sw --standard=phpcs.xml  --report=checkstyle --report-file=./test-reports/checkstyle-result.xml
+        # PHPmd
+        # vendor/bin/phpcpd
+        after-script:
+          - pipe: atlassian/checkstyle-report:0.2.1
         artifacts:
           - ./test-reports/*
 

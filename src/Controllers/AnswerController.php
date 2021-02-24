@@ -1,18 +1,16 @@
 <?php
 
-namespace KUHdo\Survey\Controllers;
+namespace KUHdo\Survey\Models\Controllers;
 
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use KUHdo\Survey\Handlers\Answer\DeleteAnswer;
-use KUHdo\Survey\Handlers\Answer\DeleteQuestion;
 use KUHdo\Survey\Handlers\Answer\IndexAnswer;
-use KUHdo\Survey\Handlers\Answer\IndexQuestion;
-use KUHdo\Survey\Answer;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Handlers\Answer\ShowAnswer;
-use KUHdo\Survey\Handlers\Answer\ShowQuestion;
 use KUHdo\Survey\Handlers\Answer\StoreAnswer;
-use KUHdo\Survey\Handlers\Answer\StoreQuestion;
 use KUHdo\Survey\Handlers\Answer\UpdateAnswer;
-use KUHdo\Survey\Handlers\Answer\UpdateQuestion;
 use KUHdo\Survey\Requests\AnswerRequest;
 
 class AnswerController extends Controller
@@ -20,13 +18,12 @@ class AnswerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $this->authorize('viewAny', Answer::class);
-
         $handler = new IndexAnswer();
         $answers = $handler();
 
@@ -37,13 +34,12 @@ class AnswerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param AnswerRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function store(AnswerRequest $request)
+    public function store(AnswerRequest $request): JsonResponse
     {
         $this->authorize('create', Answer::class);
-
         $handler = new StoreAnswer();
         $answer = $handler($request);
 
@@ -53,15 +49,13 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param Answer $answer
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function show($id)
+    public function show(Answer $answer): JsonResponse
     {
-        $answer = Answer::findOrFail($id);
         $this->authorize('view', $answer);
-
         $handler = new ShowAnswer();
         $answer = $handler($answer);
 
@@ -72,15 +66,13 @@ class AnswerController extends Controller
      * Update the specified resource in storage.
      *
      * @param AnswerRequest $request
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param Answer $answer
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function update(AnswerRequest $request, $id)
+    public function update(AnswerRequest $request, Answer $answer): JsonResponse
     {
-        $answer = Answer::findOrFail($id);
         $this->authorize('update', $answer);
-
         $handler = new UpdateAnswer();
         $answer = $handler($request, $answer);
 
@@ -90,15 +82,14 @@ class AnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param Answer $answer
+     * @return JsonResponse
+     * @throws AuthorizationException
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(Answer $answer)
     {
-        $answer = Answer::findOrFail($id);
         $this->authorize('delete', $answer);
-
         $handler = new DeleteAnswer();
         $answer = $handler($answer);
 

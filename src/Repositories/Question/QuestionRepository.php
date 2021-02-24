@@ -5,37 +5,43 @@ namespace KUHdo\Survey\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
 use KUHdo\Survey\Contracts\Voter\Voteable as Voter;
-use KUHdo\Survey\Survey;
+use KUHdo\Survey\Models\Question;
+use KUHdo\Survey\Models\Survey;
 
 interface QuestionRepository
 {
     /**
      * @return Collection
+     * @see EloquentQuestionRepository::getAll()
      */
     public function getAll() : Collection;
 
     /**
-     * @param $id
-     * @return mixed
+     * @param int $id
+     * @return Question|null
+     * @see EloquentQuestionRepository::getById()
      */
-    public function getById($id);
+    public function getById(int $id): ?Question;
 
     /**
-     * @param $id
-     * @return mixed
+     * @param int $id
+     * @return Question|null
+     * @see EloquentQuestionRepository::getByIdWithAnswers()
      */
-    public function getByIdWithAnswers($id);
+    public function getByIdWithAnswers(int $id): ?Question;
 
     /**
-     * @param $id
+     * @param int $id
      * @param Voter $voter
-     * @return mixed
+     * @return Question|null
+     * @see EloquentQuestionRepository::getByIdWithAnswersOfVoter()
      */
-    public function getByIdWithAnswersOfVoter($id, Voter $voter);
+    public function getByIdWithAnswersOfVoter(int $id, Voter $voter): ?Question;
 
     /**
      * @param Survey $survey
      * @return Collection
+     * @see EloquentQuestionRepository::getAllOfSurvey()
      */
     public function getAllOfSurvey(Survey $survey): Collection;
 
@@ -43,6 +49,7 @@ interface QuestionRepository
      * @param Survey $survey
      * @param Voter $voter
      * @return Collection
+     * @see EloquentQuestionRepository::getAllOfSurveyWithAnswersOfVoter()
      */
     public function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection;
 }

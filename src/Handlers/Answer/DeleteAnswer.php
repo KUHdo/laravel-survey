@@ -2,14 +2,20 @@
 
 namespace KUHdo\Survey\Handlers\Answer;
 
-use Illuminate\Support\Facades\Auth;
-use KUHdo\Survey\Answer;
+use Exception;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Handlers\Handler;
-use KUHdo\Survey\Requests\AnswerRequest;
 
 class DeleteAnswer extends Handler
 {
-    public function __invoke(Answer $answer)
+    /**
+     * Small delete answer handler for use in controller actions
+     *
+     * @param Answer $answer
+     * @return Answer
+     * @throws Exception
+     */
+    public function __invoke(Answer $answer): Answer
     {
         $answer->delete();
 
