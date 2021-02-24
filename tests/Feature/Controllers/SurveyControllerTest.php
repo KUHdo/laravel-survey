@@ -16,7 +16,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::index
+     * @covers  SurveyController::index
      */
     public function testIndex()
     {
@@ -32,7 +32,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::index
+     * @covers \KUHdo\Survey\Controllers\SurveyController::index
      */
     public function testIndexAsGuest()
     {
@@ -44,7 +44,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::show
+     * @covers \KUHdo\Survey\Controllers\SurveyController::show
      */
     public function testShow()
     {
@@ -60,7 +60,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::show
+     * @covers \KUHdo\Survey\Controllers\SurveyController::show
      */
     public function testShowAsGuest()
     {
@@ -73,7 +73,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::store
+     * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testStore()
     {
@@ -89,7 +89,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::store
+     * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testStoreAsGuest()
     {
@@ -102,7 +102,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::store
+     * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testStoreWithInvalidData()
     {
@@ -117,7 +117,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::store
+     * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testUpdate()
     {
@@ -134,7 +134,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::update
+     * @covers \KUHdo\Survey\Controllers\SurveyController::update
      */
     public function testUpdateAsGuest()
     {
@@ -150,7 +150,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::update
+     * @covers \KUHdo\Survey\Controllers\SurveyController::update
      */
     public function testUpdateWithInvalidData()
     {
@@ -166,7 +166,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::destroy
+     * @covers \KUHdo\Survey\Controllers\SurveyController::destroy
      */
     public function testDelete()
     {
@@ -182,7 +182,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
-     * @covers \KUHdo\Survey\Models\Controllers\SurveyController::destroy
+     * @covers \KUHdo\Survey\Controllers\SurveyController::destroy
      */
     public function testDeleteAsGuest()
     {

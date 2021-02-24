@@ -53,8 +53,11 @@ class QuestionControllerTest extends TestCase
     public function testShow()
     {
         $user = User::create();
-        $question = $this->createQuestion();
-        $response = $this->actingAs($user)->get('/survey/questions/' . $question->id);
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
+        $response = $this->actingAs($user)
+            ->get('/survey/questions/' . $question->id);
         $response->assertStatus(200);
         $this->assertEquals($question->id, $response->json()['id']);
     }
@@ -67,7 +70,9 @@ class QuestionControllerTest extends TestCase
      */
     public function testShowAsGuest()
     {
-        $question = $this->createQuestion();
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
         $response = $this->get('/survey/questions/' . $question->id);
         $response->assertStatus(403);
     }
@@ -80,9 +85,11 @@ class QuestionControllerTest extends TestCase
      */
     public function testStore()
     {
-        $survey = $this->createSurvey();
+        $survey = Survey::factory()->create();
         $user = User::create();
-        $data = array_merge($this->makeQuestion()->toArray(), ['survey_id' => $survey->id]);
+        $data = Question::factory()
+            ->for($survey)
+            ->raw();
         $response = $this->actingAs($user)->post('/survey/questions/', $data);
         $response->assertStatus(200);
         $this->assertTrue(Question::all()->count() > 0);
@@ -96,8 +103,8 @@ class QuestionControllerTest extends TestCase
      */
     public function testStoreAsGuest()
     {
-        $survey = $this->createSurvey();
-        $data = array_merge($this->makeQuestion()->toArray(), ['survey_id' => $survey->id]);
+        $survey = Survey::factory()->create();
+        $data = Question::factory()->for($survey)->raw();
         $response = $this->post('/survey/questions/', $data);
         $response->assertStatus(403);
     }
@@ -110,9 +117,11 @@ class QuestionControllerTest extends TestCase
      */
     public function testStoreWithInvalidData()
     {
-        $this->createSurvey();
+        $survey = Survey::factory()->create();
         $user = User::create();
-        $response = $this->actingAs($user)->followingRedirects()->post('/survey/questions/', []);
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->post('/survey/questions/', []);
         $response->assertStatus(404);
     }
 
@@ -125,9 +134,15 @@ class QuestionControllerTest extends TestCase
     public function testUpdate()
     {
         $user = User::create();
-        $updated = $this->makeQuestion(['question' => 'TestQuestion', 'category' => 'CategoryTest'])->toArray();
-        $question = $this->createQuestion();
-        $response = $this->actingAs($user)->put('/survey/questions/' . $question->id, $updated);
+        $updated = Question::factory()->raw([
+            'question' => 'TestQuestion',
+            'category' => 'CategoryTest'
+        ]);
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
+        $response = $this->actingAs($user)
+            ->put('/survey/questions/' . $question->id, $updated);
         $response->assertStatus(200);
         $this->assertEquals('TestQuestion', $response->json()['question']);
     }
@@ -140,8 +155,13 @@ class QuestionControllerTest extends TestCase
      */
     public function testUpdateAsGuest()
     {
-        $updated = $this->makeQuestion(['question' => 'TestQuestion', 'category' => 'CategoryTest'])->toArray();
-        $question = $this->createQuestion();
+        $updated = Question::factory()->raw([
+            'question' => 'TestQuestion',
+            'category' => 'CategoryTest'
+        ]);
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
         $response = $this->put('/survey/questions/' . $question->id, $updated);
         $response->assertStatus(403);
     }
@@ -155,8 +175,12 @@ class QuestionControllerTest extends TestCase
     public function testUpdateWithInvalidData()
     {
         $user = User::create();
-        $question = $this->createQuestion();
-        $response = $this->actingAs($user)->followingRedirects()->put('/survey/questions/' . $question->id, []);
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->put('/survey/questions/' . $question->id, []);
         $response->assertStatus(404);
     }
 
@@ -169,8 +193,11 @@ class QuestionControllerTest extends TestCase
     public function testDelete()
     {
         $user = User::create();
-        $question = $this->createQuestion();
-        $response = $this->actingAs($user)->delete('/survey/questions/' . $question->id);
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
+        $response = $this->actingAs($user)
+            ->delete('/survey/questions/' . $question->id);
         $response->assertStatus(200);
         $this->assertFalse($question->exists());
     }
@@ -183,7 +210,9 @@ class QuestionControllerTest extends TestCase
      */
     public function testDeleteAsGuest()
     {
-        $question = $this->createQuestion();
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
         $response = $this->delete('/survey/questions/' . $question->id);
         $response->assertStatus(403);
         $this->assertTrue($question->exists());

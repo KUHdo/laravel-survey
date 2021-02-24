@@ -56,7 +56,8 @@ class AnswerControllerTest extends TestCase
     {
         $user = User::create();
         $answer = Answer::factory()
-            ->hasModel($user)
+            ->for($user, 'votable')
+            ->for(Question::factory()->for(Survey::factory()))
             ->create();
         $response = $this->actingAs($user)
             ->get('/survey/answers/' . $answer->id);
@@ -72,7 +73,9 @@ class AnswerControllerTest extends TestCase
      */
     public function testShowAsGuest()
     {
-        $answer = Answer::factory()->create();
+        $answer = Answer::factory()
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create();
         $response = $this->get('/survey/answers/' . $answer->id);
         $response->assertStatus(403);
     }
@@ -85,10 +88,13 @@ class AnswerControllerTest extends TestCase
      */
     public function testStore()
     {
-        $question = $this->createQuestion();
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
         $user = User::create();
-        $data = array_merge($this->makeAnswer()->toArray(), ['question_id' => $question->id]);
-        $response = $this->actingAs($user)->post('/survey/answers/', $data);
+        $data = Answer::factory()->for($question)->raw();
+        $response = $this->actingAs($user)
+            ->post('/survey/answers/', $data);
         $response->assertStatus(200);
 
         $this->assertTrue($user->answers()->first()->exists());
@@ -102,8 +108,7 @@ class AnswerControllerTest extends TestCase
      */
     public function testStoreAsGuest()
     {
-        $data = array_merge($this->makeAnswer()->toArray(), ['question_id' => 1]);
-
+        $data = Answer::factory()->raw(['question_id' => 1]);
         $response = $this->post('/survey/answers', $data);
 
         $response->assertStatus(403);
@@ -118,7 +123,9 @@ class AnswerControllerTest extends TestCase
     public function testStoreWithInvalidData()
     {
         $user = User::create();
-        $response = $this->actingAs($user)->followingRedirects()->post('/survey/answers', []);
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->post('/survey/answers', []);
         $response->assertStatus(404);
     }
 
@@ -131,9 +138,16 @@ class AnswerControllerTest extends TestCase
     public function testUpdate()
     {
         $user = User::create();
-        $answer = $this->createAnswerWithUser($user);
-        $updated = $this->makeAnswer(['value' => '120', 'type' => 'string'])->toArray();
-        $response = $this->actingAs($user)->put('/survey/answers/' . $answer->id, $updated);
+        $answer = Answer::factory()
+            ->for($user, 'votable')
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create();
+        $updated = Answer::factory()->raw([
+            'value' => '120',
+            'type' => 'string'
+        ]);
+        $response = $this->actingAs($user)
+            ->put('/survey/answers/' . $answer->id, $updated);
         $response->assertStatus(200);
         $this->assertEquals('120', $response->json()['value']);
     }
@@ -147,9 +161,15 @@ class AnswerControllerTest extends TestCase
     public function testUpdateAsNotOwner()
     {
         $user = User::create();
-        $answer = $this->createAnswer();
-        $updated = $this->makeAnswer(['value' => '120', 'type' => 'string'])->toArray();
-        $response = $this->actingAs($user)->put('/survey/answers/' . $answer->id, $updated);
+        $answer = Answer::factory()
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create();
+        $updated = Answer::factory()->raw([
+            'value' => '120',
+            'type' => 'string'
+        ]);
+        $response = $this->actingAs($user)
+            ->put('/survey/answers/' . $answer->id, $updated);
         $response->assertStatus(403);
     }
 
@@ -161,8 +181,13 @@ class AnswerControllerTest extends TestCase
      */
     public function testUpdateAsGuest()
     {
-        $answer = $this->createAnswer();
-        $updated = $this->makeAnswer(['value' => '120', 'type' => 'string'])->toArray();
+        $answer = Answer::factory()
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create();
+        $updated = Answer::factory()->raw([
+            'value' => '120',
+            'type' => 'string'
+        ]);
         $response = $this->put('/survey/answers/' . $answer->id, $updated);
         $response->assertStatus(403);
     }
@@ -176,8 +201,13 @@ class AnswerControllerTest extends TestCase
     public function testUpdateWithInvalidData()
     {
         $user = User::create();
-        $answer = $this->createAnswerWithUser($user);
-        $response = $this->actingAs($user)->followingRedirects()->put('/survey/answers/' . $answer->id, []);
+        $answer = Answer::factory()
+            ->for($user, 'votable')
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create();
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->put('/survey/answers/' . $answer->id, []);
         $response->assertStatus(404);
     }
 
@@ -190,8 +220,12 @@ class AnswerControllerTest extends TestCase
     public function testDelete()
     {
         $user = User::create();
-        $answer = $this->createAnswerWithUser($user);
-        $response = $this->actingAs($user)->delete('/survey/answers/' . $answer->id);
+        $answer = Answer::factory()
+            ->for($user, 'votable')
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create();
+        $response = $this->actingAs($user)
+            ->delete('/survey/answers/' . $answer->id);
         $response->assertStatus(200);
         $this->assertFalse($answer->exists());
     }
@@ -205,8 +239,11 @@ class AnswerControllerTest extends TestCase
     public function testDeleteAsNotOwner()
     {
         $user = User::create();
-        $answer = $this->createAnswer();
-        $response = $this->actingAs($user)->delete('/survey/answers/' . $answer->id);
+        $answer = Answer::factory()
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create(['model_type' => 'test', 'model_id' => 1]);
+        $response = $this->actingAs($user)
+            ->delete('/survey/answers/' . $answer->id);
         $response->assertStatus(403);
         $this->assertTrue($answer->exists());
     }
@@ -219,7 +256,9 @@ class AnswerControllerTest extends TestCase
      */
     public function testDeleteAsGuest()
     {
-        $answer = $this->createAnswer();
+        $answer = Answer::factory()
+            ->for(Question::factory()->for(Survey::factory()))
+            ->create(['model_type' => 'test', 'model_id' => 1]);
         $response = $this->delete('/survey/answers/' . $answer->id);
         $response->assertStatus(403);
         $this->assertTrue($answer->exists());
