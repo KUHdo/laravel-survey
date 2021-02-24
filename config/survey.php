@@ -13,6 +13,18 @@ return [
          */
         'key' => 'kuhdo.survey.cache',
 
+        /**
+         * The cache store name to be used.
+         */
         'store' => 'default',
+    ],
+
+    /**
+     * Model bindings for resolution.
+     */
+    'models' => [
+        'answer' => \KUHdo\Survey\Models\Answer::class,
+        'question' => \KUHdo\Survey\Models\Question::class,
+        'survey' => \KUHdo\Survey\Models\Survey::class,
     ],
 ];

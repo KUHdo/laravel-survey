@@ -9,6 +9,7 @@ definitions:
   steps:
     - step: &testing
         name: Test
+        image: php:8.0
         caches:
           - composer
         script:
