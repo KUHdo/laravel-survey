@@ -81,4 +81,13 @@ class Answer extends Model implements AnswerContract
     {
         return $this->morphTo('model');
     }
+
+    /**
+     * @param int $id
+     * @return AnswerContract
+     */
+    public static function findOrFailById(int $id): AnswerContract
+    {
+        return static::findOrFail($id);
+    }
 }

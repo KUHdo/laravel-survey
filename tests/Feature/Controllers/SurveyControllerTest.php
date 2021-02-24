@@ -82,7 +82,7 @@ class SurveyControllerTest extends TestCase
         $response = $this->actingAs($user)
             ->post('/survey/surveys/', $data);
         $response->assertStatus(200);
-        $this->assertGreaterThan(Survey::all()->count(), 0);
+        $this->assertGreaterThan(0, Survey::all()->count());
     }
 
     /**

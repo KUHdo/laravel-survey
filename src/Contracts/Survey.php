@@ -2,7 +2,16 @@
 
 namespace KUHdo\Survey\Contracts;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface Survey
 {
-    // empty survey
+    /**
+     * Eloquent wrapper or anything that resolves to
+     * an survey
+     *
+     * @param int $id
+     * @return Survey
+     */
+    public static function findOrFailById(int $id): self;
 }

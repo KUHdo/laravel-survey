@@ -5,6 +5,7 @@ namespace KUHdo\Survey\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use KUHdo\Survey\Contracts\Question as QuestionContract;
 use KUHdo\Survey\Database\factories\SurveyFactory;
 use \KUHdo\Survey\Contracts\Survey as SurveyContract;
 
@@ -56,5 +57,14 @@ class Survey extends Model implements SurveyContract
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
+    }
+
+    /**
+     * @param int $id
+     * @return SurveyContract
+     */
+    public static function findOrFailById(int $id): SurveyContract
+    {
+        return static::findOrFail($id);
     }
 }

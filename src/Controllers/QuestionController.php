@@ -9,7 +9,7 @@ use KUHdo\Survey\Handlers\Question\DeleteQuestion;
 use KUHdo\Survey\Handlers\Question\IndexQuestion;
 use KUHdo\Survey\Handlers\Question\ShowQuestion;
 use KUHdo\Survey\Handlers\Question\StoreQuestion;
-use KUHdo\Survey\Models\Question;
+use KUHdo\Survey\Contracts\Question;
 use KUHdo\Survey\Requests\QuestionRequest;
 
 class QuestionController extends Controller
@@ -48,12 +48,13 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Question $question
+     * @param int $question
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function show(Question $question): JsonResponse
+    public function show(int $question): JsonResponse
     {
+        $question = resolve(Question::class)->findOrFailById($question);
         $this->authorize('view', $question);
         $handler = new ShowQuestion();
         $question = $handler($question);
@@ -65,12 +66,13 @@ class QuestionController extends Controller
      * Update the specified resource in storage.
      *
      * @param QuestionRequest $request
-     * @param Question $question
+     * @param int $question
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function update(QuestionRequest $request, $question): JsonResponse
+    public function update(QuestionRequest $request, int $question): JsonResponse
     {
+        $question = resolve(Question::class)->findOrFailById($question);
         $this->authorize('update', $question);
         $handler = new UpdateQuestion();
         $question = $handler($request, $question);
@@ -81,12 +83,13 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Question $question
+     * @param int $question
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(Question $question): JsonResponse
+    public function destroy(int $question): JsonResponse
     {
+        $question = resolve(Question::class)->findOrFailById($question);
         $this->authorize('delete', $question);
 
         $handler = new DeleteQuestion();

@@ -68,15 +68,15 @@ class SurveyServiceProvider extends ServiceProvider
         // App model binding via config
         $this->app->bind(
             Contracts\Survey::class,
-            config('models.survey')
+            config('survey.models.survey')
         );
         $this->app->bind(
             Contracts\Question::class,
-            config('models.question')
+            config('survey.models.question')
         );
         $this->app->bind(
             Contracts\Answer::class,
-            config('models.answer')
+            config('survey.models.answer')
         );
     }
 

@@ -75,6 +75,7 @@ class AnswerControllerTest extends TestCase
     {
         $answer = Answer::factory()
             ->for(Question::factory()->for(Survey::factory()))
+            ->for(User::create(), 'votable')
             ->create();
         $response = $this->get('/survey/answers/' . $answer->id);
         $response->assertStatus(403);
@@ -163,6 +164,7 @@ class AnswerControllerTest extends TestCase
         $user = User::create();
         $answer = Answer::factory()
             ->for(Question::factory()->for(Survey::factory()))
+            ->for(User::create(), 'votable')
             ->create();
         $updated = Answer::factory()->raw([
             'value' => '120',
@@ -183,6 +185,7 @@ class AnswerControllerTest extends TestCase
     {
         $answer = Answer::factory()
             ->for(Question::factory()->for(Survey::factory()))
+            ->for(User::create(), 'votable')
             ->create();
         $updated = Answer::factory()->raw([
             'value' => '120',
@@ -241,7 +244,8 @@ class AnswerControllerTest extends TestCase
         $user = User::create();
         $answer = Answer::factory()
             ->for(Question::factory()->for(Survey::factory()))
-            ->create(['model_type' => 'test', 'model_id' => 1]);
+            ->for(User::create(), 'votable')
+            ->create();
         $response = $this->actingAs($user)
             ->delete('/survey/answers/' . $answer->id);
         $response->assertStatus(403);

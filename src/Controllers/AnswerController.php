@@ -7,7 +7,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use KUHdo\Survey\Handlers\Answer\DeleteAnswer;
 use KUHdo\Survey\Handlers\Answer\IndexAnswer;
-use KUHdo\Survey\Models\Answer;
+use KUHdo\Survey\Contracts\Answer;
 use KUHdo\Survey\Handlers\Answer\ShowAnswer;
 use KUHdo\Survey\Handlers\Answer\StoreAnswer;
 use KUHdo\Survey\Handlers\Answer\UpdateAnswer;
@@ -55,7 +55,7 @@ class AnswerController extends Controller
      */
     public function show(int $answer): JsonResponse
     {
-        $answer = Answer::findOrFail($answer);
+        $answer = resolve(Answer::class)->findOrFailById($answer);
         $this->authorize('view', $answer);
         $handler = new ShowAnswer();
         $answer = $handler($answer);
@@ -67,12 +67,13 @@ class AnswerController extends Controller
      * Update the specified resource in storage.
      *
      * @param AnswerRequest $request
-     * @param Answer $answer
+     * @param int $answer
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function update(AnswerRequest $request, Answer $answer): JsonResponse
+    public function update(AnswerRequest $request, int $answer): JsonResponse
     {
+        $answer = resolve(Answer::class)->findOrFail($answer);
         $this->authorize('update', $answer);
         $handler = new UpdateAnswer();
         $answer = $handler($request, $answer);
@@ -83,13 +84,14 @@ class AnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Answer $answer
+     * @param int $answer
      * @return JsonResponse
      * @throws AuthorizationException
      * @throws Exception
      */
-    public function destroy(Answer $answer)
+    public function destroy(int $answer): JsonResponse
     {
+        $answer = resolve(Answer::class)->findOrFailById($answer);
         $this->authorize('delete', $answer);
         $handler = new DeleteAnswer();
         $answer = $handler($answer);

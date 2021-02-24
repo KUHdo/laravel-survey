@@ -11,7 +11,7 @@ use KUHdo\Survey\Handlers\Survey\ShowSurvey;
 use KUHdo\Survey\Handlers\Survey\StoreSurvey;
 use KUHdo\Survey\Handlers\Survey\UpdateSurvey;
 use KUHdo\Survey\Requests\SurveyRequest;
-use KUHdo\Survey\Models\Survey;
+use KUHdo\Survey\Contracts\Survey;
 
 class SurveyController extends Controller
 {
@@ -49,12 +49,13 @@ class SurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Survey $survey
+     * @param int $survey
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function show(Survey $survey): JsonResponse
+    public function show(int $survey): JsonResponse
     {
+        $survey = resolve(Survey::class)->findOrFailById($survey);
         $this->authorize('view', $survey);
         $handler = new ShowSurvey();
         $survey = $handler($survey);
@@ -66,12 +67,13 @@ class SurveyController extends Controller
      * Update the specified resource in storage.
      *
      * @param SurveyRequest $request
-     * @param Survey $survey
+     * @param int $survey
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function update(SurveyRequest $request, Survey $survey): JsonResponse
+    public function update(SurveyRequest $request, int $survey): JsonResponse
     {
+        $survey = resolve(Survey::class)->findOrFailById($survey);
         $this->authorize('update', $survey);
         $handler = new UpdateSurvey();
         $survey = $handler($request, $survey);
@@ -82,13 +84,14 @@ class SurveyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Survey $survey
+     * @param int $survey
      * @return JsonResponse
      * @throws AuthorizationException
      * @throws Exception
      */
-    public function destroy(Survey $survey): JsonResponse
+    public function destroy(int $survey): JsonResponse
     {
+        $survey = resolve(Survey::class)->findOrFailById($survey);
         $this->authorize('delete', $survey);
         $handler = new DeleteSurvey();
         $survey = $handler($survey);
