@@ -50,7 +50,7 @@ class EloquentQuestionRepository implements QuestionRepository
     public function getByIdWithAnswersOfVoter(int $id, Voter $voter): ?Question
     {
         return Question::with([
-            'answers' => fn (HasMany $query) =>  $query->where('model_id', '=', $voter->id)->latest()
+            'answers' => fn (HasMany $query): HasMany =>  $query->where('model_id', '=', $voter->id)->latest()
         ])->where('id', '=', $id)
           ->first();
     }
@@ -72,7 +72,7 @@ class EloquentQuestionRepository implements QuestionRepository
     public function getAllOfSurveyWithAnswersOfVoter(Survey $survey, Voter $voter): Collection
     {
         return Question::with([
-            'answers' => fn (HasMany $query) => $query->where('model_id', '=', $voter->id)->latest()
+            'answers' => fn (HasMany $query): HasMany => $query->where('model_id', '=', $voter->id)->latest()
         ])->where('survey_id', '=', $survey->id)
           ->get();
     }

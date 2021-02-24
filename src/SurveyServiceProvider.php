@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use KUHdo\Survey\Facades\Survey;
 
 class SurveyServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,7 @@ class SurveyServiceProvider extends ServiceProvider
         Route::group([
             'namespace' => 'KUHdo\Survey\Controllers',
             'prefix' => 'survey',
-            'middleware' => 'web'
+            'middleware' => 'web',
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
@@ -100,7 +101,7 @@ class SurveyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publishes policies
+     * Publishes policies.
      */
     protected function publishPolicies()
     {

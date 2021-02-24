@@ -2,6 +2,7 @@
 
 namespace KUHdo\Survey\Controllers;
 
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use KUHdo\Survey\Handlers\Survey\DeleteSurvey;
@@ -84,6 +85,7 @@ class SurveyController extends Controller
      * @param Survey $survey
      * @return JsonResponse
      * @throws AuthorizationException
+     * @throws Exception
      */
     public function destroy(Survey $survey): JsonResponse
     {
