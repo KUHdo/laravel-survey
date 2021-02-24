@@ -22,12 +22,7 @@ trait WithAnswer
      */
     protected function makeAnswer($attributes = [])
     {
-        $default = [
-            'value' => 'Test',
-            'type' => 'Test',
-        ];
-
-        return new Answer(array_merge($default, $attributes));
+        return Answer::factory()->make($attributes);
     }
 
     /**
@@ -37,13 +32,7 @@ trait WithAnswer
      */
     protected function makeAnswers($count = 1, $attributes = [])
     {
-        $answers = new Collection();
-
-        for ($i = 0; $i < $count; $i++) {
-            $answers->push($this->makeAnswer($attributes));
-        }
-
-        return $answers;
+        return Answer::factory()->count($count)->make($attributes);
     }
 
     /**

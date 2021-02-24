@@ -14,7 +14,7 @@ class SurveyFactory extends Factory
     public function definition(): array
     {
         return [
-
+            'title' => 'Test'
         ];
     }
 }
