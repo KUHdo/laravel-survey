@@ -17,14 +17,6 @@ class Answer extends Model implements AnswerContract
     use HasFactory;
 
     /**
-     * @return AnswerFactory
-     */
-    protected static function newFactory(): AnswerFactory
-    {
-        return new AnswerFactory();
-    }
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -51,6 +43,14 @@ class Answer extends Model implements AnswerContract
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @return AnswerFactory
+     */
+    protected static function newFactory(): AnswerFactory
+    {
+        return new AnswerFactory();
+    }
 
     /**
      * Get the question that owns the answer.

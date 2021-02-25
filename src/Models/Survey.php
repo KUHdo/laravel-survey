@@ -5,7 +5,6 @@ namespace KUHdo\Survey\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use KUHdo\Survey\Contracts\Question as QuestionContract;
 use KUHdo\Survey\Database\factories\SurveyFactory;
 use \KUHdo\Survey\Contracts\Survey as SurveyContract;
 
@@ -16,14 +15,6 @@ use \KUHdo\Survey\Contracts\Survey as SurveyContract;
 class Survey extends Model implements SurveyContract
 {
     use HasFactory;
-
-    /**
-     * @return SurveyFactory
-     */
-    protected static function newFactory(): SurveyFactory
-    {
-        return new SurveyFactory();
-    }
 
     /**
      * The table associated with the model.
@@ -48,6 +39,14 @@ class Survey extends Model implements SurveyContract
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @return SurveyFactory
+     */
+    protected static function newFactory(): SurveyFactory
+    {
+        return new SurveyFactory();
+    }
 
     /**
      * Get the questions for the survey.

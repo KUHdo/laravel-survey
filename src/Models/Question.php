@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use KUHdo\Survey\Contracts\Answer as AnswerContract;
 use KUHdo\Survey\Database\factories\QuestionFactory;
 use \KUHdo\Survey\Contracts\Question as QuestionContract;
 
@@ -17,14 +16,6 @@ use \KUHdo\Survey\Contracts\Question as QuestionContract;
 class Question extends Model implements QuestionContract
 {
     use HasFactory;
-
-    /**
-     * @return QuestionFactory
-     */
-    protected static function newFactory(): QuestionFactory
-    {
-        return new QuestionFactory();
-    }
 
     /**
      * The table associated with the model.
@@ -51,6 +42,14 @@ class Question extends Model implements QuestionContract
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @return QuestionFactory
+     */
+    protected static function newFactory(): QuestionFactory
+    {
+        return new QuestionFactory();
+    }
 
     /**
      * Get the survey that owns the question.
