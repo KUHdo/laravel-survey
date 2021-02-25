@@ -2,8 +2,6 @@
 
 namespace KUHdo\Survey\Contracts;
 
-use Illuminate\Database\Eloquent\Collection;
-
 interface Survey
 {
     /**
