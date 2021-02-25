@@ -1,19 +1,26 @@
 {
     "name": "kuhdo/laravel-survey",
     "description": "Package for create surveys in laravel",
-    "version": "0.10.0",
+    "version": "0.2.0",
     "license": "license",
     "authors": [
         {
             "name": "Eduard Malyj",
             "email": "eduard.malyj@kuhdo.de",
             "homepage": "https://www.kuhdo.de"
-        }
-    ],
+        },
+        {
+            "name": "Arne Bartelt",
+            "email": "arne.bartelt@kuhdo.de",
+            "homepage": "https://www.kuhdo.de"
+        }],
     "homepage": "https://bitbucket.org/kuhdo/laravel-survey",
     "keywords": [
         "Laravel",
-        "Survey"
+        "Survey",
+        "qa",
+        "question",
+        "answer"
     ],
     "require": {
         "php": "^8.0"
