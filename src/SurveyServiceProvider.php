@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use KUHdo\Survey\Facades\Survey;
 
 class SurveyServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,7 @@ class SurveyServiceProvider extends ServiceProvider
         Route::group([
             'namespace' => 'KUHdo\Survey\Controllers',
             'prefix' => 'survey',
-            'middleware' => 'web'
+            'middleware' => 'web',
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
@@ -52,9 +53,7 @@ class SurveyServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/survey.php', 'survey');
 
         // Register the service the package provides.
-        $this->app->singleton('survey', function ($app) {
-            return new Survey;
-        });
+        $this->app->singleton('survey', fn($app) => new Survey);
 
         $this->app->bind(
             'KUHdo\Survey\Repositories\Answer\AnswerRepository',
@@ -64,6 +63,20 @@ class SurveyServiceProvider extends ServiceProvider
         $this->app->bind(
             'KUHdo\Survey\Repositories\Question\QuestionRepository',
             'KUHdo\Survey\Repositories\Question\EloquentQuestionRepository'
+        );
+
+        // App model binding via config
+        $this->app->bind(
+            Contracts\Survey::class,
+            config('survey.models.survey')
+        );
+        $this->app->bind(
+            Contracts\Question::class,
+            config('survey.models.question')
+        );
+        $this->app->bind(
+            Contracts\Answer::class,
+            config('survey.models.answer')
         );
     }
 
@@ -102,7 +115,7 @@ class SurveyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publishes policies
+     * Publishes policies.
      */
     protected function publishPolicies()
     {

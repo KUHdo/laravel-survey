@@ -17,7 +17,12 @@ class AnswerRequest extends FormRequest
         return $this->registerRules();
     }
 
-    protected function registerRules()
+    /**
+     * Validation rules for a answer.
+     *
+     * @return string[]
+     */
+    protected function registerRules(): array
     {
         return [
             'value' => 'required|string',
@@ -27,7 +32,8 @@ class AnswerRequest extends FormRequest
     }
 
     /**
-     * custom error messages for request validation
+     * custom error messages for request validation.
+     *
      * @return array
      */
     public function messages()

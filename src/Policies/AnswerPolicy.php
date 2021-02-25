@@ -2,7 +2,7 @@
 
 namespace KUHdo\Survey\Policies;
 
-use KUHdo\Survey\Answer;
+use KUHdo\Survey\Models\Answer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AnswerPolicy

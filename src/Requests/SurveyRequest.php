@@ -17,7 +17,12 @@ class SurveyRequest extends FormRequest
         return $this->registerRules();
     }
 
-    protected function registerRules()
+    /**
+     * Validation rules of a survey.
+     *
+     * @return string[]
+     */
+    protected function registerRules(): array
     {
         return [
             'title' => 'required|string',
@@ -25,7 +30,8 @@ class SurveyRequest extends FormRequest
     }
 
     /**
-     * custom error messages for request validation
+     * custom error messages for request validation.
+     *
      * @return array
      */
     public function messages()

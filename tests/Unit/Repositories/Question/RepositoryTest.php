@@ -4,83 +4,125 @@
 namespace KUHdo\Survey\Tests\Unit\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
+use KUHdo\Survey\Models\Answer;
+use KUHdo\Survey\Models\Question;
+use KUHdo\Survey\Models\Survey;
 use KUHdo\Survey\Repositories\Question\QuestionRepository;
 use KUHdo\Survey\Tests\TestCase;
-use KUHdo\Survey\Tests\Traits\WithAnswer;
 use KUHdo\Survey\Tests\User;
 
 class RepositoryTest extends TestCase
 {
-    use WithAnswer;
+    /**
+     * @var QuestionRepository|null
+     */
+    private ?QuestionRepository $questionRepo;
 
     /**
-     * @var QuestionRepository
+     * Setup the test environment.
+     *
+     * @return void
      */
-    private $questionRepo;
-
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
-
         $this->questionRepo = resolve(QuestionRepository::class);
     }
 
     /**
-     * Should return Collection of Question
+     * Should return Collection of Question.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionCollection()
     {
-        $this->createQuestions(3);
-
+        Question::factory()
+            ->count(3)
+            ->for(Survey::factory())
+            ->create();
         $this->assertInstanceOf(Collection::class, $this->questionRepo->getAll());
         $this->assertEquals(3, $this->questionRepo->getAll()->count());
     }
 
     /**
-     * Should return Question with certain id
+     * Should return Question with certain id.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionById()
     {
-        $question = $this->createQuestion();
-
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
         $this->assertTrue($question->is($this->questionRepo->getById($question->id)));
     }
 
     /**
-     * Should return Question Collection of given survey
+     * Should return Question Collection of given survey.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionsOfSurvey()
     {
-        $survey = $this->createSurvey();
+        $survey = Survey::factory()
+            ->has(Question::factory()->count(3))
+            ->create();
 
-        $this->createQuestions(3, [ 'survey_id' => $survey->id ]);
-        $this->createQuestion();
+        // another question for another survey
+        Question::factory()->for(Survey::factory())->create();
 
         $this->assertEquals(3, $this->questionRepo->getAllOfSurvey($survey)->count());
         $this->assertEquals(4, $this->questionRepo->getAll()->count());
     }
 
     /**
-     * Should return certain question with related answers
+     * Should return certain question with related answers.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionWithAnswers()
     {
-        $question = $this->createQuestion();
-        $this->createAnswers(3, [ 'question_id' => $question->id ]);
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
+        Answer::factory()
+            ->count(3)
+            ->for($question)
+            ->create(['model_type' => 'test', 'model_id' => 1]);
 
         $this->assertEquals(3, $this->questionRepo->getByIdWithAnswers($question->id)->answers->count());
     }
 
     /**
-     * Should return certain question with related answers of given voter
+     * Should return certain question with related answers of given voter.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionWithAnswersAndVoter()
     {
         $user = User::create();
-        $question = $this->createQuestion();
+        $question = Question::factory()
+            ->for(Survey::factory())
+            ->create();
 
-        $this->createAnswersWithUser($user, 3, [ 'question_id' => $question->id ]);
-        $this->createAnswers(3, [ 'question_id' => $question->id ]);
+        Answer::factory()
+            ->count(3)
+            ->for($user, 'votable')
+            ->for($question)
+            ->create();
+
+        // 3 answers of an other user
+        $otherUser = User::create();
+        Answer::factory()
+            ->count(3)
+            ->for($question)
+            ->for($otherUser, 'votable')
+            ->create();
 
         $this->assertEquals(
             3,
@@ -89,18 +131,21 @@ class RepositoryTest extends TestCase
     }
 
     /**
-     * Should return Question Collection of given survey with answers and given voter
+     * Should return Question Collection of given survey with answers and given voter.
+     *
+     * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     * @medium
      */
     public function testReturnQuestionsOfSurveyWithAnswersOfVoter()
     {
         $user = User::create();
-        $survey = $this->createSurvey();
-
-        $questions = $this->createQuestions(3, [ 'survey_id' => $survey->id ]);
-
-        $questions->each(function ($question) use ($user) {
-            $this->createAnswersWithUser($user, 2, [ 'question_id' => $question->id ]);
-        });
+        $survey = Survey::factory()
+            ->has(Question::factory()
+                ->count(3)
+                ->has(Answer::factory()
+                    ->count(2)
+                    ->for($user, 'votable')))
+            ->create();
 
         $this->assertEquals(
             3,
