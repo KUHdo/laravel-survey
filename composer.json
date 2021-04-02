@@ -1,8 +1,8 @@
 {
     "name": "kuhdo/laravel-survey",
     "description": "Package for create surveys in laravel",
-    "version": "0.2.0",
-    "license": "license",
+    "version": "0.2.1",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Eduard Malyj",
