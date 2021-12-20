@@ -13,7 +13,7 @@
             "email": "arne.bartelt@kuhdo.de",
             "homepage": "https://www.kuhdo.de"
         }],
-    "homepage": "https://bitbucket.org/kuhdo/laravel-survey",
+    "homepage": "https://github.com/KUHdo/laravel-survey.git",
     "keywords": [
         "Laravel",
         "Survey",
