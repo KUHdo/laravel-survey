@@ -32,14 +32,14 @@ class SurveyServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerRoutes()
+    protected function registerRoutes(): void
     {
         Route::group([
-            'namespace' => 'KUHdo\Survey\Controllers',
-            'prefix' => 'survey',
-            'middleware' => 'web',
+            'namespace' => config('survey.routes.namespace'),
+            'prefix' => config('survey.routes.prefix'),
+            'middleware' => config('survey.routes.middleware'),
         ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
     }
 
@@ -50,7 +50,7 @@ class SurveyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/survey.php', 'survey');
+        $this->mergeConfigFrom(__DIR__ . '/../config/survey.php', 'survey');
 
         // Register the service the package provides.
         $this->app->singleton('survey', fn($app) => new Survey);
@@ -89,7 +89,7 @@ class SurveyServiceProvider extends ServiceProvider
     {
         return ['survey'];
     }
-    
+
     /**
      * Console-specific booting.
      *
@@ -100,15 +100,15 @@ class SurveyServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/survey.php' => config_path('survey.php'),
+            __DIR__ . '/../config/survey.php' => config_path('survey.php'),
         ], 'survey.config');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_survey_tables.php.stub' => $this->getMigrationFileName($filesystem),
+            __DIR__ . '/../database/migrations/create_survey_tables.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../stubs/SurveyServiceProvider.stub' => app_path('Providers/SurveyServiceProvider.php'),
+            __DIR__ . '/../stubs/SurveyServiceProvider.stub' => app_path('Providers/SurveyServiceProvider.php'),
         ], 'horizon-provider');
 
         $this->publishPolicies();
@@ -120,15 +120,15 @@ class SurveyServiceProvider extends ServiceProvider
     protected function publishPolicies()
     {
         $this->publishes([
-            __DIR__.'/../stubs/SurveyPolicy.stub' => app_path('Policies/SurveyPolicy.php'),
+            __DIR__ . '/../stubs/SurveyPolicy.stub' => app_path('Policies/SurveyPolicy.php'),
         ], 'survey-policy');
 
         $this->publishes([
-            __DIR__.'/../stubs/QuestionPolicy.stub' => app_path('Policies/QuestionPolicy.php'),
+            __DIR__ . '/../stubs/QuestionPolicy.stub' => app_path('Policies/QuestionPolicy.php'),
         ], 'question-policy');
 
         $this->publishes([
-            __DIR__.'/../stubs/AnswerPolicy.stub' => app_path('Policies/AnswerPolicy.php'),
+            __DIR__ . '/../stubs/AnswerPolicy.stub' => app_path('Policies/AnswerPolicy.php'),
         ], 'answer-policy');
     }
 
@@ -138,14 +138,14 @@ class SurveyServiceProvider extends ServiceProvider
      * @param Filesystem $filesystem
      * @return string
      */
-    protected function getMigrationFileName(Filesystem $filesystem) : string
+    protected function getMigrationFileName(Filesystem $filesystem): string
     {
         $timestamp = date('Y_m_d_His');
 
-        return Collection::make($this->app->databasePath().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR)
+        return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
             ->flatMap(function ($path) use ($filesystem) {
-                return $filesystem->glob($path.'*_create_survey_tables.php');
-            })->push($this->app->databasePath()."/migrations/{$timestamp}_create_survey_tables.php")
+                return $filesystem->glob($path . '*_create_survey_tables.php');
+            })->push($this->app->databasePath() . "/migrations/{$timestamp}_create_survey_tables.php")
             ->first();
     }
 }

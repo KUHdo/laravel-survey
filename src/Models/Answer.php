@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use KUHdo\Survey\Database\Factories\AnswerFactory;
-use \KUHdo\Survey\Contracts\Answer as AnswerContract;
+use KUHdo\Survey\Contracts\Answer as AnswerContract;
 
 /**
  * Class Answer

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use KUHdo\Survey\Database\Factories\SurveyFactory;
-use \KUHdo\Survey\Contracts\Survey as SurveyContract;
+use KUHdo\Survey\Contracts\Survey as SurveyContract;
 
 /**
  * Class Survey
