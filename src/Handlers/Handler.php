@@ -17,8 +17,9 @@ abstract class Handler extends BaseController
      * Execute an action on the handler.
      *
      * @param  string  $method
-     * @param  array   $parameters
+     * @param  array  $parameters
      * @return Response
+     *
      * @noinspection PhpMissingReturnTypeInspection because of parent Controller
      */
     public function callAction($method, $parameters)

@@ -11,8 +11,6 @@ class DeleteQuestion extends Handler
     /**
      * Small delete question handler for use in controller actions
      *
-     * @param Question $question
-     * @return Question
      * @throws Exception
      */
     public function __invoke(Question $question): Question

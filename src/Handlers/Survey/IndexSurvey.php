@@ -10,8 +10,6 @@ class IndexSurvey extends Handler
 {
     /**
      * Small index survey handler for use in controller actions
-     *
-     * @return Collection|array
      */
     public function __invoke(): Collection|array
     {

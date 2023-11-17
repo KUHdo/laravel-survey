@@ -5,12 +5,11 @@ namespace KUHdo\Survey\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use KUHdo\Survey\Database\Factories\AnswerFactory;
 use KUHdo\Survey\Contracts\Answer as AnswerContract;
+use KUHdo\Survey\Database\Factories\AnswerFactory;
 
 /**
  * Class Answer
- * @package KUHdo\Survey
  */
 class Answer extends Model implements AnswerContract
 {
@@ -34,7 +33,7 @@ class Answer extends Model implements AnswerContract
         'created_at',
         'updated_at',
         'model_type',
-        'model_id'
+        'model_id',
     ];
 
     /**
@@ -44,9 +43,6 @@ class Answer extends Model implements AnswerContract
      */
     protected $guarded = ['id'];
 
-    /**
-     * @return AnswerFactory
-     */
     protected static function newFactory(): AnswerFactory
     {
         return new AnswerFactory();
@@ -64,7 +60,6 @@ class Answer extends Model implements AnswerContract
      * Get the owning answerable model.
      *
      * @deprecated Use votable as relation instead
-     * @return MorphTo
      */
     public function model(): MorphTo
     {
@@ -74,18 +69,13 @@ class Answer extends Model implements AnswerContract
     /**
      * Get the owning answerable model.
      *
-     * @return MorphTo
      * @since 1.0.0
      */
-    public function votable() : MorphTo
+    public function votable(): MorphTo
     {
         return $this->morphTo('model');
     }
 
-    /**
-     * @param int $id
-     * @return AnswerContract
-     */
     public static function findOrFailById(int $id): AnswerContract
     {
         return static::findOrFail($id);

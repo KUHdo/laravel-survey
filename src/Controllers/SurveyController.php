@@ -5,20 +5,19 @@ namespace KUHdo\Survey\Controllers;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
+use KUHdo\Survey\Contracts\Survey;
 use KUHdo\Survey\Handlers\Survey\DeleteSurvey;
 use KUHdo\Survey\Handlers\Survey\IndexSurvey;
 use KUHdo\Survey\Handlers\Survey\ShowSurvey;
 use KUHdo\Survey\Handlers\Survey\StoreSurvey;
 use KUHdo\Survey\Handlers\Survey\UpdateSurvey;
 use KUHdo\Survey\Requests\SurveyRequest;
-use KUHdo\Survey\Contracts\Survey;
 
 class SurveyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function index(): JsonResponse
@@ -33,8 +32,6 @@ class SurveyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param SurveyRequest $request
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function store(SurveyRequest $request): JsonResponse
@@ -49,8 +46,6 @@ class SurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $survey
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function show(int $survey): JsonResponse
@@ -66,9 +61,6 @@ class SurveyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param SurveyRequest $request
-     * @param int $survey
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function update(SurveyRequest $request, int $survey): JsonResponse
@@ -84,8 +76,6 @@ class SurveyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $survey
-     * @return JsonResponse
      * @throws AuthorizationException
      * @throws Exception
      */

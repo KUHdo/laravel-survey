@@ -10,10 +10,6 @@ class UpdateQuestion extends Handler
 {
     /**
      * Small update question handler for use in controller actions
-     *
-     * @param QuestionRequest $request
-     * @param Question $question
-     * @return Question
      */
     public function __invoke(QuestionRequest $request, Question $question): Question
     {

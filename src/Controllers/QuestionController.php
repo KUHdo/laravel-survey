@@ -4,12 +4,12 @@ namespace KUHdo\Survey\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use KUHdo\Survey\Handlers\Question\UpdateQuestion;
+use KUHdo\Survey\Contracts\Question;
 use KUHdo\Survey\Handlers\Question\DeleteQuestion;
 use KUHdo\Survey\Handlers\Question\IndexQuestion;
 use KUHdo\Survey\Handlers\Question\ShowQuestion;
 use KUHdo\Survey\Handlers\Question\StoreQuestion;
-use KUHdo\Survey\Contracts\Question;
+use KUHdo\Survey\Handlers\Question\UpdateQuestion;
 use KUHdo\Survey\Requests\QuestionRequest;
 
 class QuestionController extends Controller
@@ -17,7 +17,6 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function index(): JsonResponse
@@ -32,8 +31,6 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param QuestionRequest $request
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function store(QuestionRequest $request): JsonResponse
@@ -48,8 +45,6 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $question
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function show(int $question): JsonResponse
@@ -65,9 +60,6 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param QuestionRequest $request
-     * @param int $question
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function update(QuestionRequest $request, int $question): JsonResponse
@@ -83,8 +75,6 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $question
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function destroy(int $question): JsonResponse

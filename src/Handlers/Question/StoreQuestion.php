@@ -5,16 +5,14 @@ namespace KUHdo\Survey\Handlers\Question;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use KUHdo\Survey\Handlers\Handler;
 use KUHdo\Survey\Models\Question;
-use KUHdo\Survey\Requests\QuestionRequest;
 use KUHdo\Survey\Models\Survey;
+use KUHdo\Survey\Requests\QuestionRequest;
 
 class StoreQuestion extends Handler
 {
     /**
      * Small store question handler for use in controller actions
      *
-     * @param QuestionRequest $request
-     * @return Survey
      * @throws ModelNotFoundException
      */
     public function __invoke(QuestionRequest $request): Survey

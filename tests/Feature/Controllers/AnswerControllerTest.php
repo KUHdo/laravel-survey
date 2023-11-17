@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KUHdo\Survey\Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -18,6 +17,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action Index
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::Index
+     *
      * @small
      */
     public function testIndex()
@@ -38,6 +38,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action IndexAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::index
+     *
      * @small
      */
     public function testIndexAsGuest()
@@ -50,6 +51,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action ShowAsOwner
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::show
+     *
      * @small
      */
     public function testShowAsOwner()
@@ -60,7 +62,7 @@ class AnswerControllerTest extends TestCase
             ->for(Question::factory()->for(Survey::factory()))
             ->create();
         $response = $this->actingAs($user)
-            ->get('/survey/answers/' . $answer->id);
+            ->get('/survey/answers/'.$answer->id);
         $response->assertStatus(200);
         $this->assertEquals($answer->id, $response->json()['id']);
     }
@@ -69,6 +71,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action ShowAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::show
+     *
      * @small
      */
     public function testShowAsGuest()
@@ -77,7 +80,7 @@ class AnswerControllerTest extends TestCase
             ->for(Question::factory()->for(Survey::factory()))
             ->for(User::create(), 'votable')
             ->create();
-        $response = $this->get('/survey/answers/' . $answer->id);
+        $response = $this->get('/survey/answers/'.$answer->id);
         $response->assertStatus(403);
     }
 
@@ -85,6 +88,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action Store
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::store
+     *
      * @small
      */
     public function testStore()
@@ -105,6 +109,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action StoreAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::store
+     *
      * @small
      */
     public function testStoreAsGuest()
@@ -119,6 +124,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action StoreWithInvalidData
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::store
+     *
      * @small
      */
     public function testStoreWithInvalidData()
@@ -134,6 +140,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action Update
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::update
+     *
      * @small
      */
     public function testUpdate()
@@ -145,10 +152,10 @@ class AnswerControllerTest extends TestCase
             ->create();
         $updated = Answer::factory()->raw([
             'value' => '120',
-            'type' => 'string'
+            'type' => 'string',
         ]);
         $response = $this->actingAs($user)
-            ->put('/survey/answers/' . $answer->id, $updated);
+            ->put('/survey/answers/'.$answer->id, $updated);
         $response->assertStatus(200);
         $this->assertEquals('120', $response->json()['value']);
     }
@@ -157,6 +164,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action UpdateAsNotOwner
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::update
+     *
      * @small
      */
     public function testUpdateAsNotOwner()
@@ -168,10 +176,10 @@ class AnswerControllerTest extends TestCase
             ->create();
         $updated = Answer::factory()->raw([
             'value' => '120',
-            'type' => 'string'
+            'type' => 'string',
         ]);
         $response = $this->actingAs($user)
-            ->put('/survey/answers/' . $answer->id, $updated);
+            ->put('/survey/answers/'.$answer->id, $updated);
         $response->assertStatus(403);
     }
 
@@ -179,6 +187,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action UpdateAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::update
+     *
      * @small
      */
     public function testUpdateAsGuest()
@@ -189,9 +198,9 @@ class AnswerControllerTest extends TestCase
             ->create();
         $updated = Answer::factory()->raw([
             'value' => '120',
-            'type' => 'string'
+            'type' => 'string',
         ]);
-        $response = $this->put('/survey/answers/' . $answer->id, $updated);
+        $response = $this->put('/survey/answers/'.$answer->id, $updated);
         $response->assertStatus(403);
     }
 
@@ -199,6 +208,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action UpdateWithInvalidData
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::update
+     *
      * @small
      */
     public function testUpdateWithInvalidData()
@@ -210,7 +220,7 @@ class AnswerControllerTest extends TestCase
             ->create();
         $response = $this->actingAs($user)
             ->followingRedirects()
-            ->put('/survey/answers/' . $answer->id, []);
+            ->put('/survey/answers/'.$answer->id, []);
         $response->assertStatus(404);
     }
 
@@ -218,6 +228,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action Delete
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::destroy
+     *
      * @small
      */
     public function testDelete()
@@ -228,7 +239,7 @@ class AnswerControllerTest extends TestCase
             ->for(Question::factory()->for(Survey::factory()))
             ->create();
         $response = $this->actingAs($user)
-            ->delete('/survey/answers/' . $answer->id);
+            ->delete('/survey/answers/'.$answer->id);
         $response->assertStatus(200);
         $this->assertFalse($answer->exists());
     }
@@ -237,6 +248,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action DeleteAsNotOwner
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::destroy
+     *
      * @small
      */
     public function testDeleteAsNotOwner()
@@ -247,7 +259,7 @@ class AnswerControllerTest extends TestCase
             ->for(User::create(), 'votable')
             ->create();
         $response = $this->actingAs($user)
-            ->delete('/survey/answers/' . $answer->id);
+            ->delete('/survey/answers/'.$answer->id);
         $response->assertStatus(403);
         $this->assertTrue($answer->exists());
     }
@@ -256,6 +268,7 @@ class AnswerControllerTest extends TestCase
      * Test for answer controller action DeleteAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\AnswerController::destroy
+     *
      * @small
      */
     public function testDeleteAsGuest()
@@ -263,7 +276,7 @@ class AnswerControllerTest extends TestCase
         $answer = Answer::factory()
             ->for(Question::factory()->for(Survey::factory()))
             ->create(['model_type' => 'test', 'model_id' => 1]);
-        $response = $this->delete('/survey/answers/' . $answer->id);
+        $response = $this->delete('/survey/answers/'.$answer->id);
         $response->assertStatus(403);
         $this->assertTrue($answer->exists());
     }

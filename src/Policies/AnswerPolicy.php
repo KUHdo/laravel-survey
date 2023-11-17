@@ -2,8 +2,8 @@
 
 namespace KUHdo\Survey\Policies;
 
-use KUHdo\Survey\Models\Answer;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use KUHdo\Survey\Models\Answer;
 
 class AnswerPolicy
 {
@@ -12,7 +12,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can view any answers.
      *
-     * @param  $user
      * @return mixed
      */
     public function viewAny($user)
@@ -23,8 +22,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can view the answer.
      *
-     * @param  $user
-     * @param  Answer  $answer
      * @return mixed
      */
     public function view($user, Answer $answer)
@@ -35,7 +32,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can create answers.
      *
-     * @param  $user
      * @return mixed
      */
     public function create($user)
@@ -46,8 +42,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can update the answer.
      *
-     * @param  $user
-     * @param  Answer  $answer
      * @return mixed
      */
     public function update($user, Answer $answer)
@@ -58,8 +52,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can delete the answer.
      *
-     * @param  $user
-     * @param  Answer  $answer
      * @return mixed
      */
     public function delete($user, Answer $answer)
@@ -70,8 +62,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can restore the answer.
      *
-     * @param  $user
-     * @param  Answer  $answer
      * @return mixed
      */
     public function restore($user, Answer $answer)
@@ -82,8 +72,6 @@ class AnswerPolicy
     /**
      * Determine whether the user can permanently delete the answer.
      *
-     * @param  $user
-     * @param  Answer  $answer
      * @return mixed
      */
     public function forceDelete($user, Answer $answer)

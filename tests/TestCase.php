@@ -8,8 +8,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 abstract class TestCase extends OrchestraTestCase
 {
     /**
-     * @param  Application $app
-     * @return array
+     * @param  Application  $app
      */
     protected function getPackageProviders($app): array
     {
@@ -19,7 +18,7 @@ abstract class TestCase extends OrchestraTestCase
     /**
      * Define environment setup.
      *
-     * @param  Application $app
+     * @param  Application  $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -27,21 +26,19 @@ abstract class TestCase extends OrchestraTestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setUp();
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         // and other test setup steps you need to perform
     }

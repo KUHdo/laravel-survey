@@ -34,6 +34,6 @@ return [
     'routes' => [
         'namespace' => 'KUHdo\Survey\Controllers',
         'prefix' => 'survey',
-        'middleware' => ['web']
-    ]
+        'middleware' => ['web'],
+    ],
 ];

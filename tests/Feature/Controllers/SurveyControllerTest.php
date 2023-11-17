@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KUHdo\Survey\Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -16,6 +15,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers  SurveyController::index
      */
     public function testIndex()
@@ -32,6 +32,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::index
      */
     public function testIndexAsGuest()
@@ -44,6 +45,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::show
      */
     public function testShow()
@@ -51,7 +53,7 @@ class SurveyControllerTest extends TestCase
         $user = User::create();
         $survey = Survey::factory()->create();
         $response = $this->actingAs($user)
-            ->get('/survey/surveys/' . $survey->id);
+            ->get('/survey/surveys/'.$survey->id);
         $response->assertStatus(200);
         $this->assertEquals($survey->id, $response->json()['id']);
     }
@@ -60,12 +62,13 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::show
      */
     public function testShowAsGuest()
     {
         $survey = Survey::factory()->create();
-        $response = $this->get('/survey/surveys/' . $survey->id);
+        $response = $this->get('/survey/surveys/'.$survey->id);
         $response->assertStatus(403);
     }
 
@@ -73,6 +76,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testStore()
@@ -89,6 +93,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testStoreAsGuest()
@@ -102,6 +107,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testStoreWithInvalidData()
@@ -117,6 +123,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::store
      */
     public function testUpdate()
@@ -125,7 +132,7 @@ class SurveyControllerTest extends TestCase
         $updated = Survey::factory()->state(['title' => 'TestSurvey'])->raw();
         $survey = Survey::factory()->create();
         $response = $this->actingAs($user)
-            ->put('/survey/surveys/' . $survey->id, $updated);
+            ->put('/survey/surveys/'.$survey->id, $updated);
         $response->assertStatus(200);
         $this->assertEquals('TestSurvey', $response->json()['title']);
     }
@@ -134,6 +141,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::update
      */
     public function testUpdateAsGuest()
@@ -142,7 +150,7 @@ class SurveyControllerTest extends TestCase
             ->state(['title' => 'TestSurvey'])
             ->raw();
         $survey = Survey::factory()->create();
-        $response = $this->put('/survey/surveys/' . $survey->id, $updated);
+        $response = $this->put('/survey/surveys/'.$survey->id, $updated);
         $response->assertStatus(403);
     }
 
@@ -150,6 +158,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::update
      */
     public function testUpdateWithInvalidData()
@@ -158,7 +167,7 @@ class SurveyControllerTest extends TestCase
         $survey = Survey::factory()->create();
         $response = $this->actingAs($user)
             ->followingRedirects()
-            ->put('/survey/surveys/' . $survey->id, []);
+            ->put('/survey/surveys/'.$survey->id, []);
         $response->assertStatus(404);
     }
 
@@ -166,6 +175,7 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::destroy
      */
     public function testDelete()
@@ -173,7 +183,7 @@ class SurveyControllerTest extends TestCase
         $user = User::create();
         $survey = Survey::factory()->create();
         $response = $this->actingAs($user)
-            ->delete('/survey/surveys/' . $survey->id);
+            ->delete('/survey/surveys/'.$survey->id);
         $response->assertStatus(200);
         $this->assertFalse($survey->exists());
     }
@@ -182,12 +192,13 @@ class SurveyControllerTest extends TestCase
      * Basic feature test for controller action.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Controllers\SurveyController::destroy
      */
     public function testDeleteAsGuest()
     {
         $survey = Survey::factory()->create();
-        $response = $this->delete('/survey/surveys/' . $survey->id);
+        $response = $this->delete('/survey/surveys/'.$survey->id);
         $response->assertStatus(403);
         $this->assertTrue($survey->exists());
     }

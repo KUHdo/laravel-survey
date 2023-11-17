@@ -3,8 +3,8 @@
 namespace KUHdo\Survey\Policies;
 
 use App\User;
-use KUHdo\Survey\Models\Question;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use KUHdo\Survey\Models\Question;
 
 class QuestionPolicy
 {
@@ -13,7 +13,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can view any questions.
      *
-     * @param  $user
      * @return mixed
      */
     public function viewAny($user)
@@ -24,8 +23,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can view the question.
      *
-     * @param  $user
-     * @param  Question  $question
      * @return mixed
      */
     public function view($user, Question $question)
@@ -36,7 +33,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can create questions.
      *
-     * @param   $user
      * @return mixed
      */
     public function create($user)
@@ -47,7 +43,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can update the question.
      *
-     * @param    $user
      * @param  uestion  $question
      * @return mixed
      */
@@ -59,8 +54,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can delete the question.
      *
-     * @param   $user
-     * @param  Question  $question
      * @return mixed
      */
     public function delete($user, Question $question)
@@ -71,8 +64,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can restore the question.
      *
-     * @param  $user
-     * @param  Question  $question
      * @return mixed
      */
     public function restore($user, Question $question)
@@ -83,8 +74,6 @@ class QuestionPolicy
     /**
      * Determine whether the user can permanently delete the question.
      *
-     * @param  $user
-     * @param  Question  $question
      * @return mixed
      */
     public function forceDelete($user, Question $question)

@@ -2,8 +2,8 @@
 
 namespace KUHdo\Survey\Policies;
 
-use KUHdo\Survey\Models\Survey;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use KUHdo\Survey\Models\Survey;
 
 class SurveyPolicy
 {
@@ -12,7 +12,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can view any surveys.
      *
-     * @param  $user
      * @return mixed
      */
     public function viewAny($user)
@@ -23,8 +22,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can view the survey.
      *
-     * @param  $user
-     * @param  Survey  $survey
      * @return mixed
      */
     public function view($user, Survey $survey)
@@ -35,7 +32,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can create surveys.
      *
-     * @param  $user
      * @return mixed
      */
     public function create($user)
@@ -46,8 +42,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can update the survey.
      *
-     * @param  $user
-     * @param  Survey  $survey
      * @return mixed
      */
     public function update($user, Survey $survey)
@@ -58,8 +52,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can delete the survey.
      *
-     * @param  $user
-     * @param  Survey  $survey
      * @return mixed
      */
     public function delete($user, Survey $survey)
@@ -70,8 +62,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can restore the survey.
      *
-     * @param  $user
-     * @param  Survey  $survey
      * @return mixed
      */
     public function restore($user, Survey $survey)
@@ -82,8 +72,6 @@ class SurveyPolicy
     /**
      * Determine whether the user can permanently delete the survey.
      *
-     * @param  $user
-     * @param  Survey  $survey
      * @return mixed
      */
     public function forceDelete($user, Survey $survey)

@@ -14,16 +14,10 @@ use KUHdo\Survey\Tests\User;
 
 class RepositoryTest extends TestCase
 {
-
-    /**
-     * @var AnswerRepository|null
-     */
     private ?AnswerRepository $answerRepo;
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -35,6 +29,7 @@ class RepositoryTest extends TestCase
      * Should return Collection of Answer.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository
      */
     public function testReturnAnswerCollection()
@@ -51,6 +46,7 @@ class RepositoryTest extends TestCase
      * Should return Answer with certain id.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository
      */
     public function testReturnAnswerById()
@@ -65,6 +61,7 @@ class RepositoryTest extends TestCase
      * Should bind correct concrete which is defined in Service.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository
      */
     public function testAnswerRepoShouldBeInstanceOfEloquentRepository()
@@ -76,6 +73,7 @@ class RepositoryTest extends TestCase
      * Should fetch latest answer of a voter (User).
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository
      */
     public function testGetLatestAnswerOfUser()
@@ -86,7 +84,7 @@ class RepositoryTest extends TestCase
             ->for($user, 'votable')
             ->for(Question::factory()->for(Survey::factory()))
             ->create();
-        $latestAnswer =  Answer::factory()
+        $latestAnswer = Answer::factory()
             ->for($user, 'votable')
             ->for(Question::factory()->for(Survey::factory()))
             ->create();
@@ -100,6 +98,7 @@ class RepositoryTest extends TestCase
      * Should fetch latest answer of certain question.
      *
      * @small
+     *
      * @covers \KUHdo\Survey\Repositories\Answer\EloquentAnswerRepository
      */
     public function testGetLatestAnswerOfUserForCertainQuestion()

@@ -9,8 +9,6 @@ trait Voteable
 {
     /**
      * All related answers of a voter
-     *
-     * @return MorphMany
      */
     public function answers(): MorphMany
     {

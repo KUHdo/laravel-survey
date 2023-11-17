@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KUHdo\Survey\Tests\Unit\Repositories\Question;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -13,15 +12,10 @@ use KUHdo\Survey\Tests\User;
 
 class RepositoryTest extends TestCase
 {
-    /**
-     * @var QuestionRepository|null
-     */
     private ?QuestionRepository $questionRepo;
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -33,6 +27,7 @@ class RepositoryTest extends TestCase
      * Should return Collection of Question.
      *
      * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     *
      * @medium
      */
     public function testReturnQuestionCollection()
@@ -49,6 +44,7 @@ class RepositoryTest extends TestCase
      * Should return Question with certain id.
      *
      * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     *
      * @medium
      */
     public function testReturnQuestionById()
@@ -63,6 +59,7 @@ class RepositoryTest extends TestCase
      * Should return Question Collection of given survey.
      *
      * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     *
      * @medium
      */
     public function testReturnQuestionsOfSurvey()
@@ -82,6 +79,7 @@ class RepositoryTest extends TestCase
      * Should return certain question with related answers.
      *
      * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     *
      * @medium
      */
     public function testReturnQuestionWithAnswers()
@@ -101,6 +99,7 @@ class RepositoryTest extends TestCase
      * Should return certain question with related answers of given voter.
      *
      * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     *
      * @medium
      */
     public function testReturnQuestionWithAnswersAndVoter()
@@ -134,6 +133,7 @@ class RepositoryTest extends TestCase
      * Should return Question Collection of given survey with answers and given voter.
      *
      * @covers \KUHdo\Survey\Repositories\Question\EloquentQuestionRepository
+     *
      * @medium
      */
     public function testReturnQuestionsOfSurveyWithAnswersOfVoter()

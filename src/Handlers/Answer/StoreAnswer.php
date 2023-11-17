@@ -3,8 +3,8 @@
 namespace KUHdo\Survey\Handlers\Answer;
 
 use Illuminate\Support\Facades\Auth;
-use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Handlers\Handler;
+use KUHdo\Survey\Models\Answer;
 use KUHdo\Survey\Models\Question;
 use KUHdo\Survey\Requests\AnswerRequest;
 
@@ -13,7 +13,6 @@ class StoreAnswer extends Handler
     /**
      * Small store answer handler for use in controller actions
      *
-     * @param AnswerRequest $request
      * @return Answer
      */
     public function __invoke(AnswerRequest $request)

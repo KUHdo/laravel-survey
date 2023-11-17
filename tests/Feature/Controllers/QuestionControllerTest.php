@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KUHdo\Survey\Tests\Feature\Controllers;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -17,6 +16,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action Index
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::index
+     *
      * @small
      */
     public function testIndex()
@@ -36,6 +36,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action IndexAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::index
+     *
      * @small
      */
     public function testIndexAsGuest()
@@ -48,6 +49,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action Show
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::show
+     *
      * @small
      */
     public function testShow()
@@ -57,7 +59,7 @@ class QuestionControllerTest extends TestCase
             ->for(Survey::factory())
             ->create();
         $response = $this->actingAs($user)
-            ->get('/survey/questions/' . $question->id);
+            ->get('/survey/questions/'.$question->id);
         $response->assertStatus(200);
         $this->assertEquals($question->id, $response->json()['id']);
     }
@@ -66,6 +68,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action ShowAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::show
+     *
      * @small
      */
     public function testShowAsGuest()
@@ -73,7 +76,7 @@ class QuestionControllerTest extends TestCase
         $question = Question::factory()
             ->for(Survey::factory())
             ->create();
-        $response = $this->get('/survey/questions/' . $question->id);
+        $response = $this->get('/survey/questions/'.$question->id);
         $response->assertStatus(403);
     }
 
@@ -81,6 +84,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action Store
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::store
+     *
      * @small
      */
     public function testStore()
@@ -99,6 +103,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action StoreAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::store
+     *
      * @small
      */
     public function testStoreAsGuest()
@@ -113,6 +118,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action StoreWithInvalidData
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::store
+     *
      * @small
      */
     public function testStoreWithInvalidData()
@@ -129,6 +135,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action Update
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::update
+     *
      * @small
      */
     public function testUpdate()
@@ -136,13 +143,13 @@ class QuestionControllerTest extends TestCase
         $user = User::create();
         $updated = Question::factory()->raw([
             'question' => 'TestQuestion',
-            'category' => 'CategoryTest'
+            'category' => 'CategoryTest',
         ]);
         $question = Question::factory()
             ->for(Survey::factory())
             ->create();
         $response = $this->actingAs($user)
-            ->put('/survey/questions/' . $question->id, $updated);
+            ->put('/survey/questions/'.$question->id, $updated);
         $response->assertStatus(200);
         $this->assertEquals('TestQuestion', $response->json()['question']);
     }
@@ -151,18 +158,19 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action UpdateAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::update
+     *
      * @small
      */
     public function testUpdateAsGuest()
     {
         $updated = Question::factory()->raw([
             'question' => 'TestQuestion',
-            'category' => 'CategoryTest'
+            'category' => 'CategoryTest',
         ]);
         $question = Question::factory()
             ->for(Survey::factory())
             ->create();
-        $response = $this->put('/survey/questions/' . $question->id, $updated);
+        $response = $this->put('/survey/questions/'.$question->id, $updated);
         $response->assertStatus(403);
     }
 
@@ -170,6 +178,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action UpdateWithInvalidData
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::update
+     *
      * @small
      */
     public function testUpdateWithInvalidData()
@@ -180,7 +189,7 @@ class QuestionControllerTest extends TestCase
             ->create();
         $response = $this->actingAs($user)
             ->followingRedirects()
-            ->put('/survey/questions/' . $question->id, []);
+            ->put('/survey/questions/'.$question->id, []);
         $response->assertStatus(404);
     }
 
@@ -188,6 +197,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action Delete
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::destroy
+     *
      * @small
      */
     public function testDelete()
@@ -197,7 +207,7 @@ class QuestionControllerTest extends TestCase
             ->for(Survey::factory())
             ->create();
         $response = $this->actingAs($user)
-            ->delete('/survey/questions/' . $question->id);
+            ->delete('/survey/questions/'.$question->id);
         $response->assertStatus(200);
         $this->assertFalse($question->exists());
     }
@@ -206,6 +216,7 @@ class QuestionControllerTest extends TestCase
      * Test for question controller action DeleteAsGuest
      *
      * @covers \KUHdo\Survey\Controllers\QuestionController::destroy
+     *
      * @small
      */
     public function testDeleteAsGuest()
@@ -213,7 +224,7 @@ class QuestionControllerTest extends TestCase
         $question = Question::factory()
             ->for(Survey::factory())
             ->create();
-        $response = $this->delete('/survey/questions/' . $question->id);
+        $response = $this->delete('/survey/questions/'.$question->id);
         $response->assertStatus(403);
         $this->assertTrue($question->exists());
     }

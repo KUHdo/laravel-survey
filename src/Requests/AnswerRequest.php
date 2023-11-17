@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KUHdo\Survey\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

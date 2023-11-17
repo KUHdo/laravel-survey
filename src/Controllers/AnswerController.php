@@ -5,9 +5,9 @@ namespace KUHdo\Survey\Controllers;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
+use KUHdo\Survey\Contracts\Answer;
 use KUHdo\Survey\Handlers\Answer\DeleteAnswer;
 use KUHdo\Survey\Handlers\Answer\IndexAnswer;
-use KUHdo\Survey\Contracts\Answer;
 use KUHdo\Survey\Handlers\Answer\ShowAnswer;
 use KUHdo\Survey\Handlers\Answer\StoreAnswer;
 use KUHdo\Survey\Handlers\Answer\UpdateAnswer;
@@ -18,7 +18,6 @@ class AnswerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function index(): JsonResponse
@@ -33,8 +32,6 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param AnswerRequest $request
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function store(AnswerRequest $request): JsonResponse
@@ -49,8 +46,6 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $answer
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function show(int $answer): JsonResponse
@@ -66,9 +61,6 @@ class AnswerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AnswerRequest $request
-     * @param int $answer
-     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function update(AnswerRequest $request, int $answer): JsonResponse
@@ -84,8 +76,6 @@ class AnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $answer
-     * @return JsonResponse
      * @throws AuthorizationException
      * @throws Exception
      */
