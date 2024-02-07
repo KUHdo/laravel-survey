@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use KUHdo\Survey\Contracts\Question as QuestionContract;
 use KUHdo\Survey\Database\Factories\QuestionFactory;
 
+/**
+ * Class Question
+ */
 class Question extends Model implements QuestionContract
 {
     use HasFactory;

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use KUHdo\Survey\Contracts\Answer as AnswerContract;
 use KUHdo\Survey\Database\Factories\AnswerFactory;
 
+/**
+ * Class Answer
+ */
 class Answer extends Model implements AnswerContract
 {
     use HasFactory;
