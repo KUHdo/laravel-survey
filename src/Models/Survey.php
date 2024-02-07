@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use KUHdo\Survey\Contracts\Survey as SurveyContract;
 use KUHdo\Survey\Database\Factories\SurveyFactory;
 
-/**
- * Class Survey
- */
 class Survey extends Model implements SurveyContract
 {
     use HasFactory;
